@@ -1,0 +1,60 @@
+body {
+    background-color: #eee;
+    font-family: "Helvetica Neue", "Helvetica", sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  *{
+    box-sizing: border-box;
+  }
+  header {
+    font-size: 2rem;
+    padding: 1em;
+  }
+  .container{
+    display: flex;
+    height: 100%;
+  }
+  .menu-bar{
+    border-bottom: 1px solid #367d85;
+    color: #eee;
+    font-size: 1.5rem;
+
+  }
+  .flex-item:first-child {
+    flex-grow: 1;
+  }
+
+  .flex-item:first-child .container{
+    flex-direction: column;
+    background-color: #05dbf2;
+  }
+
+  .flex-item{
+    flex-grow: 9;
+    padding: 1em;
+  }
+  .flex-item .container{
+    flex-direction: column;
+  }
+  .container section{
+    padding: 1em;
+    left: 0;
+    right: 0;
+    top: 0;
+  }
+  .flex-item h2{
+    font-size: 2rem;
+  }
+  .flex-card h2{
+    font-size: 2rem;
+  }
+  .flex-item .container .flex-card {
+    color: #4b75f2;
+  }
+  .flex-item .container .flex-card .flex-card{
+    background-color: #7292f2;
+    color: #f0f0f0;
+    border-radius: 10px;
+    padding: 1em;
+  }
