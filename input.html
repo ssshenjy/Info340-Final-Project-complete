@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>INFO340 Project: Draft 1</title>
+  <link rel="icon" type="image/png" href="img/favicon.png" />
+  <meta name="authors" content="Candice Hu, Ashlyn Li, Sally Shen, Oscar Wang">
+  <meta name="description" content="description!!!!!!!!!!!!!">
+
+  <!-- normalize.css for cross-browser stuff -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+
+  <link rel="stylesheet" href="css/inputstyle.css">
+</head>
+
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  
+  <main>
+    <!-- Overall Container -->
+    <div class="container">
+
+      <!-- Page title-->
+      <h1>Start a New Trip</h1>
+
+      <!-- The container including all the chunks that users will input values-->
+      <form class="input-container">
+        <!-- Input1: Destination-->
+        <div class="input">
+          <label for="destination">Destination: </label>
+          <input type="text" id="destination" name="destination" placeholder="Enter your destination">
+        </div>
+
+        <section class="date">
+          <!-- Input2: Start Day-->
+          <div class="input">
+            <label for="start-date">Start date:</label>
+            <input type="date" id="start-date" name="start-date">
+          </div>
+
+          <!-- Input3: End Day-->
+          <div class="input">
+            <label for="end-date">End date:</label>
+            <input type="date" id="end-date" name="end-date">
+          </div>
+        </section>
+
+        <!--button to submit the input values-->
+        <button class="submit-button" type="submit">Start the trip</button>
+      </form>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; App Copy Right Place Holder!!!!!!!!!!!!!</p>
+    <p>Contact Info!!!!!!!!!!!!!!!</p>
+  </footer>
+
+</body>
+</html>
