@@ -45,6 +45,7 @@ header img{
 .sidebar .flex-item span{
   display: inline-block;
   vertical-align: middle;
+  color: #1e2c57;
 }
 
 .sidebar .flex-item img{
@@ -94,8 +95,19 @@ header img{
   border: 1px solid #eee;
   border-radius: 0.7em;
 }
-
-
+.add-event{
+  padding: 15px;
+  border-radius: 2em;
+  color: #1e2c57;
+  background-color: #eee;
+  border: 3px solid #1e2c57;
+  position: fixed;
+  bottom: 50px;
+  right: 50px; 
+}
+.add-event:hover{
+  color: #39529e;
+}
 .flex-day{
   width: 100%;
   flex-basis: 100%;
