@@ -39,6 +39,9 @@ header img{
 .sidebar .flex-item{
   margin-bottom: 15px;
 }
+.sidebar .flex-item span:hover{
+  color: #39529e;
+}
 .sidebar .flex-item span{
   display: inline-block;
   vertical-align: middle;
@@ -101,14 +104,31 @@ header img{
   margin-bottom: 50px;
   border-top: 1px solid #243567;
 }
-.flex-default{
+.flex-default, .flex-itinerary{
   max-width: 100%;
-  word-wrap: break-word;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  margin: 5px 5px 10px 0;
+  color: #ece0e0;
+  background-color: #39529e;
+  border: 1px solid #ccc;
+  border-radius: 0.5em;
+  padding: 10px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 .flex-default h3, .flex-default p {
   margin: 0;
   white-space: normal;
+}
+.flex-event{
+  background-color: rgb(98, 195, 163);
+}
+#needs_attention{
+  background-color: rgb(243, 186, 70);
+}
+#needs_attention p{
+  color: rgb(131, 0, 0);
+  text-align: center;
 }
 @media (min-width: 799px) {
   .flex-day{
@@ -116,31 +136,24 @@ header img{
       white-space: nowrap;
       flex-wrap: wrap;
   }
-  .flex-day h2{
+  .flex-day h2{               /*!!!!!!!!!!!!!!!!!!!!!!!!Problem: different format for different flex-days on dif sizes*/
       margin-right: 30px;
   
   }
   .flex-items{
-      display: flex;
-      flex-wrap: wrap;
-  }
+    display: flex;
+    flex-wrap: wrap;
+}
   .flex-default{
       flex: 0 0 40%;
-      margin: 10px 10px 30px 0;
-      background-color: #39529e;
-      border-radius: 0.5em;
-      padding: 10px;
-      color: #ece0e0;
       width: 200px;
-      height: 200px;
-      padding: 10px;
-      border: 1px solid #ccc;
-      overflow-wrap: break-word;
-      word-wrap: break-word;
+      margin-top: 20px;
   }
-  #test{
-      background-color: greenyellow;
+  .flex-event{
+    flex-basis: 100%;
   }
-  
+  .flex-itinerary{
+    flex-basis: 100%;
+  }
 
 }
