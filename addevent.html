@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Travel Planner - Add Event</title>
+  <title>Journemo - Add Event</title>
   <link rel="stylesheet" type="text/css" href="css/addeventstyle.css">
 </head>
 
 <body>
   <header>
     <h1>Journemo<img src="img/app_icon.png" alt="Journemo App Icon"></h1>
+    <p><a href="index.html" class=“back”>Back</a></p>
   </header>
 
   <h1>Add Event</h1>
@@ -19,13 +20,16 @@
     <input type="date" id="eventDate" name="eventDate" required>
 
     <label for="eventTime">Event Time:</label>
-    <input type="time" id="eventTime" name="eventTime" required>
+    <input type="time" id="eventTime" name="eventTime">
 
     <label for="location">Location:</label>
-    <input type="text" id="location" name="location" required>
+    <input type="text" id="location" name="location">
 
     <label for="description">Description:</label>
     <textarea id="description" name="description"></textarea>
+
+    <label for="itinerary">Is It An Itinerary?</label>
+    <input type="checkbox" id="itinerary" name="itinerary" required>
 
     <input type="submit" value="Add Event">
   </form>

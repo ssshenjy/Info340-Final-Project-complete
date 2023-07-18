@@ -6,7 +6,7 @@
   <title>INFO340 Project: Draft 1</title>
   <link rel="icon" type="image/png" href="img/favicon.png" />
   <meta name="authors" content="Candice Hu, Ashlyn Li, Sally Shen, Oscar Wang">
-  <meta name="description" content="description!!!!!!!!!!!!!">
+  <meta name="description" content="This is the main page of Journemo, an travel planner to put all your plans all in one place.">
 
   <!-- normalize.css for cross-browser stuff -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
@@ -29,8 +29,10 @@
         </div>
 
         <div class="mainbar">
-            <div class="plan_header"><h2>Plan Name</h2><a href="addevent.html" class="add-event">Add Event</a></div>
+            <div class="plan_header"><h2>Plan Name</h2><a href="addevent.html" alt=“addevent_icon” class="add-event">Add Event</a></div>
             <div class="flex-day">
+
+                <!-- what users will see if an itinerary is added but not filled in -->
                 <h2>Day 1</h2>
                 <div class="flex-items">
                     <div class="flex-default">
@@ -61,12 +63,13 @@
                         <p>You haven't planned this itinerary yet!</p>
                     </div>
                     <div class="flex-default flex-event">
-                        <h3>Event</h3>
-                        <p>event description </p>
+                        <h3>Event: Pike Place Market</h3>
+                        <p>Seattle's original farmers market and the center of locally sourced, artisan and specialty foods.</p>
                     </div>
                 </div>
             </div>
-
+            
+            <!-- what users will see if events are added -->
             <div class="flex-day">
                 <h2> Day 2</h2>
                 <div class="flex-items">
@@ -80,11 +83,13 @@
                         <p>Remaining Budget: </p>
                     </div>
                     <div class="flex-default flex-event" id="test">
-                        <h3>Event</h3>
-                        <p>event description </p>
+                        <h3>Event: Pike Place Market</h3>
+                        <p>Seattle's original farmers market and the center of locally sourced, artisan and specialty foods.</p>
                     </div>
                 </div>
             </div>
+
+            <!-- what users will see in default -->
             <div class="flex-day">
                 <h2> Day 3</h2>
                 <div class="flex-items">
@@ -103,8 +108,8 @@
     </div></main>
 
     <footer>
-        <p>&copy; App Copy Right Place Holder!!!!!!!!!!!!!</p>
-        <p>Contact Info!!!!!!!!!!!!!!!</p>
+        <p>&copy; 2023 Journemo. All rights reserved.</p>
+        <p>Contact Us: <a href="mailto:info@journemo.com"><span class="material-icons"></span>info@journemo.com</a></p>
     </footer>
 </body>
 </html>
