@@ -15,6 +15,13 @@ header {
 header h1{
   display: inline-block;
 }
+header h1 a {
+  text-decoration: none;
+  color: #1e2c57;
+}
+header h1 a:hover {
+  color: #39529e;
+}
 header img{
   height: 1em;
   margin-left: 5px;
@@ -31,7 +38,7 @@ header img{
 .sidebar h2 {
   display: inline-block;
   background-color: #243567;
-  border-radius: 5em;
+  border-radius: 0.3em;
   padding: 0.5em;
   color: #ece0e0;
   
@@ -83,6 +90,7 @@ header img{
   flex-direction: column;
 }
 .plan_header{
+  position: relative;
   background-image: url("../img/plan_name.png");
   background-size: cover;
   background-position: center;
@@ -90,10 +98,20 @@ header img{
   display: flex;
   align-items: center;
   justify-content: center;
-
   flex-direction: column;
   border: 1px solid #eee;
   border-radius: 0.7em;
+}
+.plan_header a {
+  text-decoration: none;
+}
+.plan_header .delete-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
 }
 .add-event{
   padding: 15px;
@@ -133,7 +151,30 @@ header img{
   white-space: normal;
 }
 .flex-event{
+  position: relative;
+}
+.flex-itinerary {
+  position: relative;
+}
+.flex-itinerary .delete-icon{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+.flex-event{
   background-color: rgb(98, 195, 163);
+  position: relative;
+}
+.flex-event .delete-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
 }
 #needs_attention{
   background-color: rgb(243, 186, 70);
@@ -148,7 +189,7 @@ header img{
       white-space: nowrap;
       flex-wrap: wrap;
   }
-  .flex-day h2{               /*!!!!!!!!!!!!!!!!!!!!!!!!Problem: different format for different flex-days on dif sizes*/
+  .flex-day h3{               /*!!!!!!!!!!!!!!!!!!!!!!!!Problem: different format for different flex-days on dif sizes*/
       margin-right: 30px;
   
   }
