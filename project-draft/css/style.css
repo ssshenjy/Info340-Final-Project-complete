@@ -39,7 +39,8 @@ body {
 
 .bg-image {
   background-image: url('../img/start_background.jpeg');
-  background-size: cover;
+  background-size: auto;
+  height: 100vh;
   background-position: center center;
 }
 
