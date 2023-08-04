@@ -2,30 +2,41 @@
   box-sizing: border-box;
 }
 body {
-  background-color: #eee;
-  color: #1e2c57;
+  background: rgb(246, 243, 239);
   font-family: "Helvetica Neue", "Helvetica", sans-serif;
-  line-height: 1.5;
-  height: 100%;
-  margin: 2em;
 }
-header {
-  height: 100px;
+
+.hero-image {
+  background: url('../img/travel-022.jpg') no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100vh;
+  color: rgb(253, 250, 250);
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
-header h1{
-  display: inline-block;
+
+.features-section {
+  background: #fdf5e6;
+  padding: 50px 0;
 }
-header h1 a {
-  text-decoration: none;
-  color: #1e2c57;
+
+.features-section .card {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
-header h1 a:hover {
-  color: #39529e;
+
+.text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
-header img{
-  height: 1em;
-  margin-left: 5px;
-}
+
+/* index.html specific */
 .sidebar{
   display: flex;
   height: 100%;
@@ -37,10 +48,8 @@ header img{
 }
 .sidebar h2 {
   display: inline-block;
-  background-color: #243567;
   border-radius: 0.3em;
   padding: 0.5em;
-  color: #ece0e0;
   
 }
 .sidebar .flex-item{
@@ -77,13 +86,11 @@ header img{
   }
 }
 
-
-.container{
+.containerIndex{
   display: flex;
   height: 100%;
   flex: 1;
 }
-
 .mainbar {
   display: flex;
   flex-basis: 100%;
@@ -208,6 +215,6 @@ header img{
   .flex-itinerary{
     flex-basis: 100%;
   }
-  .
+  
 
 }
