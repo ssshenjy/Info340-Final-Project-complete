@@ -1,6 +1,7 @@
 *{
   box-sizing: border-box;
 }
+
 body {
   background: rgb(246, 243, 239);
   font-family: "Helvetica Neue", "Helvetica", sans-serif;
@@ -37,6 +38,7 @@ body {
 }
 
 /* index.html specific */
+/* sidebar */
 .sidebar{
   display: flex;
   height: 100%;
@@ -46,22 +48,25 @@ body {
   margin-right: 20px;
   align-items: center;
 }
+
 .sidebar h2 {
   display: inline-block;
-  border-radius: 0.3em;
   padding: 0.5em;
-  
+  margin-left: 0.8em;
 }
+
 .sidebar .flex-item{
   margin-bottom: 15px;
 }
+
 .sidebar .flex-item span:hover{
-  color: #39529e;
+  color: #0077ff;
 }
+
 .sidebar .flex-item span{
   display: inline-block;
   vertical-align: middle;
-  color: #1e2c57;
+  color: #39529e;
 }
 
 .sidebar .flex-item img{
@@ -69,6 +74,7 @@ body {
   margin-right: 5px;
   vertical-align: middle;
 }
+
 @media (max-width: 798px) {
   .sidebar .flex-item a span, .sidebar .flex-item h2{
       display: none;
@@ -77,6 +83,7 @@ body {
       margin-top: 25px;
   }
 }
+
 @media (min-width: 799px) {
   #menu{
       display: none;
@@ -86,19 +93,22 @@ body {
   }
 }
 
+/* Main page */
 .containerIndex{
   display: flex;
   height: 100%;
   flex: 1;
 }
+
 .mainbar {
   display: flex;
   flex-basis: 100%;
   flex-direction: column;
 }
+
 .plan_header{
   position: relative;
-  background-image: url("../img/plan_name.png");
+  background: linear-gradient(to right, #e1edc6, #9ac4ef);
   background-size: cover;
   background-position: center;
   height: 90vh;
@@ -109,8 +119,9 @@ body {
   border: 1px solid #eee;
   border-radius: 0.7em;
 }
-.plan_header a {
-  text-decoration: none;
+.plan_name {
+  color: #eee;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 .plan_header .delete-icon {
   position: absolute;
@@ -120,19 +131,26 @@ body {
   height: 20px;
   cursor: pointer;
 }
-.add-event{
-  padding: 15px;
-  border-radius: 2em;
-  color: #1e2c57;
-  background-color: #eee;
+
+/* "add event" on bottom-right corner */
+.add-event {
+  padding: 12px 25px;
+  border-radius: 30px;
+  color: #fff;
+  background-color: #1e2c57;
   border: 3px solid #1e2c57;
   position: fixed;
   bottom: 50px;
   right: 50px; 
+  z-index: 9999;
+  text-decoration: none;
 }
+
 .add-event:hover{
   color: #39529e;
 }
+
+/* day plan */
 .flex-day{
   width: 100%;
   flex-basis: 100%;
@@ -141,29 +159,27 @@ body {
   margin-bottom: 50px;
   border-top: 1px solid #243567;
 }
-.flex-default, .flex-itinerary{
+
+.flex-default,
+.flex-itinerary,
+.flex-event {
   max-width: 100%;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   margin: 5px 5px 10px 0;
-  color: #ece0e0;
-  background-color: #39529e;
+  color: #333;
+  background-color: #f9f9f9;
   border: 1px solid #ccc;
   border-radius: 0.5em;
   padding: 10px;
   overflow-wrap: break-word;
   word-wrap: break-word;
 }
-.flex-default h3, .flex-default p {
-  margin: 0;
-  white-space: normal;
+
+.flex-day h3 {
+  margin-bottom: 10px;
 }
-.flex-event{
-  position: relative;
-}
-.flex-itinerary {
-  position: relative;
-}
-.flex-itinerary .delete-icon{
+
+.delete-icon{
   position: absolute;
   top: 10px;
   right: 10px;
@@ -172,49 +188,52 @@ body {
   cursor: pointer;
 }
 .flex-event{
-  background-color: rgb(98, 195, 163);
+  background-color: #9ac4efa4;
   position: relative;
 }
-.flex-event .delete-icon {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
+
+#needs_attention {
+  background-color: rgba(255, 253, 106, 0.613);
+  position: relative;
 }
-#needs_attention{
-  background-color: rgb(243, 186, 70);
+
+#needs_attention .delete-icon {
+  z-index: 1;
 }
-#needs_attention p{
-  color: rgb(131, 0, 0);
-  text-align: center;
+
+#needs_attention p {
+  color: #721c1c;
+  font-weight: bold;
 }
-@media (min-width: 799px) {
-  .flex-day{
-      flex-direction: row;
-      white-space: nowrap;
-      flex-wrap: wrap;
+
+#completed {
+  background-color: #9ac4efa4;
+  position: relative;
+}
+#completed .delete-icon {
+  z-index: 1;
+}
+
+@media (min-width: 769px) {
+  .flex-day {
+    flex-direction: row;
+    white-space: nowrap;
+    flex-wrap: wrap;
   }
-  .flex-day h3{               /*!!!!!!!!!!!!!!!!!!!!!!!!Problem: different format for different flex-days on dif sizes*/
-      margin-right: 30px;
-  
-  }
-  .flex-items{
+
+  .flex-items {
     display: flex;
     flex-wrap: wrap;
-}
-  .flex-default{
-      flex: 0 0 40%;
-      width: 200px;
-      margin-top: 20px;
   }
-  .flex-event{
-    flex-basis: 100%;
-  }
-  .flex-itinerary{
-    flex-basis: 100%;
-  }
-  
 
+  .flex-default {
+    flex: 0 0 calc(50% - 10px);
+    margin-right: 10px;
+    margin-top: 20px;
+  }
+
+  .flex-event,
+  .flex-itinerary {
+    flex-basis: 100%;
+  }
 }
