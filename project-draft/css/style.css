@@ -38,8 +38,8 @@ body {
 }
 
 .bg-image {
-  background-image: url('../img/start_background.jpeg');
-  background-size: auto;
+  background-image: url('../img/input-bg.jpeg');
+  background-size: cover;
   height: 100vh;
   background-position: center center;
 }
