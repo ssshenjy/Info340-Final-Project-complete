@@ -3,10 +3,15 @@ import { Link } from 'react-router-dom';
 
 function Input(props) {
     const [destination, setDestination] = useState('');
+    const [budget, setBudget] = useState(0);
 
     const handleDestinationChange = (e) => {
       setDestination(e.target.value);
     };
+    const handleBudgetChange = (e) => {
+        setBudget(e.target.value);
+    };
+
   
   return (
     <div>
@@ -41,10 +46,9 @@ function Input(props) {
 
           <div className="mb-3">
             <label htmlFor="budget" className="form-label">Budget:</label>
-            <input type="number" className="form-control" id="budget" name="budget" min="0" />
+            <input type="number" className="form-control" id="budget" name="budget" min="0" value={budget} onChange={handleBudgetChange}/>
           </div>
 
-          {/* Button to submit the input values */}
           <Link to='/planner' className="btn btn-primary">Start the trip</Link>
         </form>
       </main>

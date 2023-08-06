@@ -2,7 +2,6 @@ import React from 'react';
 import { useParams, Link} from 'react-router-dom';
 
 function Planner(props) {
-    const { destination } = useParams();
 
   return (
     <div>
@@ -22,14 +21,6 @@ function Planner(props) {
                 <span>Plan1</span>
               </a>
             </div>
-            {destination && (
-              <div className="flex-item">
-                <a href="#" aria-label="New Plan">
-                  <img src="img/travel-bag.png" alt="plan_icon" />
-                  <span>{destination}</span>
-                </a>
-              </div>
-            )}
             <div className="flex-item">
               <Link to="/input">
                 <img src="img/add.png" alt="add_icon" />
@@ -45,7 +36,7 @@ function Planner(props) {
             </a>
             {/* Plan Title */}
             <div className="plan_header">
-              <h2 className="plan_name">{destination}</h2>
+              <h2 className="plan_name">PlanName</h2>
               <img src="img/delete.png" alt="delete_icon" className="delete-icon" />
             </div>
             {/* Day 1 */}
@@ -53,17 +44,19 @@ function Planner(props) {
               {/* what users will see if an itinerary is added but not filled in */}
               <h3>Day 1</h3>
               <div className="flex-items">
-                <div className="flex-default">
-                  <h4>Notes</h4>
-                  <p>Click to add notes</p>
-                </div>
-                <div className="flex-default">
-                  <h4>Budget</h4>
-                  <p>Daily Cost: $300</p>
-                  <p>Remaining Budget: $700</p>
+                <div className="flex-defaults">
+                    <div className="flex-notes">
+                    <h4>Notes</h4>
+                    <p>Click to add notes</p>
+                    </div>
+                    <div className="flex-budget">
+                    <h4>Budget</h4>
+                    <p>Daily Cost: $0</p>
+                    <p>Remaining Budget: $700</p>
+                    </div>
                 </div>
                 <div className="flex-itinerary" id="completed">
-                  <img src="../public/img/delete.png" alt="delete_icon" className="delete-icon" />
+                  <img src="img/delete.png" alt="delete_icon" className="delete-icon" />
                   <h4>Flight</h4>
                   <p>Flight Information</p>
                 </div>
@@ -84,15 +77,17 @@ function Planner(props) {
             <div className="flex-day">
               <h3>Day 2</h3>
               <div className="flex-items">
-                <div className="flex-default">
-                  <h4>Notes</h4>
-                  <p>Click to add notes</p>
-                </div>
-                <div className="flex-default">
-                  <h4>Budget</h4>
-                  <p>Daily Cost: $0</p>
-                  <p>Remaining Budget: $700</p>
-                </div>
+                <div className="flex-defaults">
+                        <div className="flex-notes">
+                        <h4>Notes</h4>
+                        <p>Click to add notes</p>
+                        </div>
+                        <div className="flex-budget">
+                        <h4>Budget</h4>
+                        <p>Daily Cost: $0</p>
+                        <p>Remaining Budget: $700</p>
+                        </div>
+                    </div>
                 <div className="flex-event" id="test">
                   <img src="img/delete.png" alt="delete_icon" className="delete-icon" />
                   <h4>Event: Pike Place Market</h4>
@@ -103,16 +98,18 @@ function Planner(props) {
             {/* Day 3 */}
             {/* what users will see in default */}
             <div className="flex-day">
-              <h4>Day 3</h4>
+              <h3>Day 3</h3>
               <div className="flex-items">
-                <div className="flex-default">
-                  <h4>Notes</h4>
-                  <p>Click to add notes</p>
-                </div>
-                <div className="flex-default">
-                  <h4>Budget</h4>
-                  <p>Daily Cost: $0</p>
-                  <p>Remaining Budget: $700</p>
+                <div className="flex-defaults">
+                    <div className="flex-notes">
+                    <h4>Notes</h4>
+                    <p>Click to add notes</p>
+                    </div>
+                    <div className="flex-budget">
+                    <h4>Budget</h4>
+                    <p>Daily Cost: $0</p>
+                    <p>Remaining Budget: $700</p>
+                    </div>
                 </div>
               </div>
             </div>
