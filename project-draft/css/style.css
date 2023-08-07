@@ -44,6 +44,14 @@ body {
   background-position: center center;
 }
 
+.bg-sky {
+  background : url('../img/sky.png');
+  background-size: cover;
+  height: 105vh;
+  background-position: center center;
+  padding: 70px;
+}
+
   /* index.html specific */
   /* sidebar */
   .sidebar{
