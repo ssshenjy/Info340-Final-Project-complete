@@ -50,7 +50,7 @@ function Planner(props) {
           {/* Side bar */}
           <div className="sidebar">
             <div className="flex-item">
-              <img src="public/img/menu.png" alt="menu_icon" id="menu" />
+              <img src="img/menu.png" alt="menu_icon" id="menu" />
               <h2>Choose Plan</h2>
             </div>
             <div className="flex-item">
