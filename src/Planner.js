@@ -3,12 +3,14 @@ import { useParams, Link} from 'react-router-dom';
 import DayList from './DayList';
 
 function Planner(props) {
+  const { destination, startDate, endDate, budget } = props.tripData || {};
+
   {/* Input.js - duration */}
   const  duration  = 3;   {/*const { duration } = useParams();*/}
   const dayNumbers = Array.from({ length: Number(duration) }, (_, index) => index + 1);
   
   {/* Input.js - budget*/}
-  const initialBudget = 1000; {/*const { initialBudget } = useParams();*/}
+  const initialBudget = budget; {/*const { initialBudget } = useParams();*/}
   const [remainingBudget, setRemainingBudget] = useState(initialBudget);
   const [dailyBudgets, setDailyBudgets] = useState(Array(duration).fill(0));
 
@@ -44,7 +46,7 @@ function Planner(props) {
             <div className="flex-item">
               <a href="#">
                 <img src="img/travel-bag.png" alt="plan_icon" />
-                <span>Plan1</span>
+                <span>{destination ? destination : 'Start your First Plan'}</span>
               </a>
             </div>
             <div className="flex-item">
@@ -62,7 +64,7 @@ function Planner(props) {
             </a>
             {/* Plan Title */}
             <div className="plan_header">
-              <h2 className="plan_name">PlanName</h2>
+              <h2 className="plan_name">{destination}</h2>
               <img src="img/delete.png" alt="delete_icon" className="delete-icon" />
             </div>
             {/* Day 1 */}

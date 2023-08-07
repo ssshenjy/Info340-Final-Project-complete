@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 function Input(props) {
     const [destination, setDestination] = useState('');
     const [budget, setBudget] = useState(0);
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
 
     const handleDestinationChange = (e) => {
       setDestination(e.target.value);
@@ -11,6 +13,19 @@ function Input(props) {
     const handleBudgetChange = (e) => {
         setBudget(e.target.value);
     };
+    const handleStartDateChange = (e) => {
+      setStartDate(e.target.value);
+    };
+    const handleEndDateChange = (e) => {
+      setEndDate(e.target.value);
+    };
+
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      props.setTripData({destination,startDate, endDate, budget});
+      
+    };
+
 
   
   return (
@@ -22,7 +37,7 @@ function Input(props) {
         <h1>Start a New Trip</h1>
 
         {/* The container including all the chunks that users will input values */}
-        <form>
+        <form onSubmit={handleSubmit}>
           {/* Input1: Destination */}
           <div className="mb-3">
             <label htmlFor="destination" className="form-label">Destination:</label>
@@ -34,13 +49,13 @@ function Input(props) {
             {/* Input2: Start Day */}
             <div className="col-md-6 mb-3">
               <label htmlFor="start-date" className="form-label">Start date:</label>
-              <input type="date" className="form-control" id="start-date" name="start-date" />
+              <input type="date" className="form-control" id="start-date" name="startDate" value={startDate} onChange={handleStartDateChange} />
             </div>
 
             {/* Input3: End Day */}
             <div className="col-md-6 mb-3">
               <label htmlFor="end-date" className="form-label">End date:</label>
-              <input type="date" className="form-control" id="end-date" name="end-date" />
+              <input type="date" className="form-control" id="end-date" name="endDate" value={endDate} onChange={handleEndDateChange} />
             </div>
           </div>
 
@@ -49,8 +64,10 @@ function Input(props) {
             <input type="number" className="form-control" id="budget" name="budget" min="0" value={budget} onChange={handleBudgetChange}/>
           </div>
 
-          <Link to='/planner' className="btn btn-primary">Start the trip</Link>
+          <button type="submit" className="btn btn-primary">Confirm your information</button>
+
         </form>
+        <Link to='/planner' className="btn btn-primary">Start the trip</Link>
       </main>
 
       <footer className="bg-light py-3 mt-5">
