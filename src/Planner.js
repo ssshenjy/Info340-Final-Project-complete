@@ -6,14 +6,18 @@ function Planner(props) {
   const { destination, startDate, endDate, budget } = props.tripData || {};
 
   {/* Input.js - duration */}
-  const startDateCal = new Date(startDate);
-  const endDateCal = new Date(endDate);
-  const timeDifference = endDateCal - startDateCal;
-  const duration = Math.ceil(timeDifference / (1000 * 60 * 60 * 24)) + 1;
-  const dayNumbers = Array.from({ length: Number(duration) }, (_, index) => index + 1);
+  const [duration, setDuration] = useState(3);
+  const [dayNumbers, setDayNumbers] = useState(Array.from({ length: duration }, (_, index) => index + 1));
 
-  // const  duration  = 3;   {/*const { duration } = useParams();*/}
-  // const dayNumbers = Array.from({ length: Number(duration) }, (_, index) => index + 1);
+  if (startDate && endDate) {
+    const startDateCal = new Date(startDate);
+    const endDateCal = new Date(endDate);
+    const timeDifference = endDateCal - startDateCal;
+    const inputDuration = Math.ceil(timeDifference / (1000 * 60 * 60 * 24)) + 1;
+    
+    setDuration(inputDuration);
+    setDayNumbers(Array.from({ length: inputDuration }, (_, index) => index + 1));
+  }
   
   {/* Input.js - budget*/}
   const initialBudget = budget; {/*const { initialBudget } = useParams();*/}

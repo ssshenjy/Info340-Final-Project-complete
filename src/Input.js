@@ -6,6 +6,7 @@ function Input(props) {
     const [budget, setBudget] = useState(0);
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
+    const [endDateError, setEndDateError] = useState('');
 
     const handleDestinationChange = (e) => {
       setDestination(e.target.value);
@@ -17,11 +18,26 @@ function Input(props) {
       setStartDate(e.target.value);
     };
     const handleEndDateChange = (e) => {
-      setEndDate(e.target.value);
+      //setEndDate(e.target.value);
+      const inputEndDate = e.target.value;
+      setEndDate(inputEndDate);
+
+      if (startDate && inputEndDate) {
+          const startDateObj = new Date(startDate);
+          const endDateObj = new Date(inputEndDate);
+          if (endDateObj < startDateObj) {
+              setEndDateError("End date cannot be earlier than start date");
+          } else {
+              setEndDateError("");
+          }
+      }
     };
 
     const handleSubmit = (e) => {
       e.preventDefault();
+      if (endDateError) {
+        return;
+    }
       props.setTripData({destination,startDate, endDate, budget});
       
     };
@@ -56,6 +72,7 @@ function Input(props) {
             <div className="col-md-6 mb-3">
               <label htmlFor="end-date" className="form-label">End date:</label>
               <input type="date" className="form-control" id="end-date" name="endDate" value={endDate} onChange={handleEndDateChange} required/>
+              {endDateError && <p className="text-danger">{endDateError}</p>}
             </div>
           </div>
 
@@ -64,10 +81,16 @@ function Input(props) {
             <input type="number" className="form-control" id="budget" name="budget" min="0" value={budget} onChange={handleBudgetChange}/>
           </div>
 
-          <button type="submit" className="btn btn-primary">Confirm your information</button>
+          <button type="submit" className="btn btn-primary">Confirm your information before starting the trip</button>
 
         </form>
-        <Link to='/planner' className="btn btn-primary">Start the trip</Link>
+        {endDateError && (
+        <p className="text-danger">Please correct the errors before starting the trip!</p>
+        )}
+
+        {!endDateError && (
+          <Link to="/planner" className="btn btn-primary">Start the trip</Link>
+        )}
       </main>
 
       <footer className="bg-light py-3 mt-5">
