@@ -59,9 +59,10 @@ function Planner(props) {
 
           {/* Main page */}
           <div className="mainbar">
-            <a href="addevent.html" alt="addevent_icon" className="add-event">
-              Add Event
-            </a>
+            <Link to="/addevent" className="add-event">
+              <span>Add Event</span>
+            </Link>
+
             {/* Plan Title */}
             <div className="plan_header">
               <h2 className="plan_name">{destination}</h2>

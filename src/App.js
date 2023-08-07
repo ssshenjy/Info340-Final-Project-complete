@@ -7,7 +7,7 @@ import { useState } from 'react';
 import IntroductionComponent from './Introduction'
 import InputComponent from './Input';
 import PlannerComponent from './Planner';
-// import AddEventComponent from './AddEvent';
+import AddEventComponent from './AddEvent';
 
 function App(props) {
   const [tripData, setTripData] = useState({
@@ -31,7 +31,7 @@ function App(props) {
         <Route path="/introduction" element={<IntroductionComponent />} />
         <Route path="/input" element={<InputComponent setTripData={setTripData}/>} />
         <Route path="/planner" element={<PlannerComponent tripData={tripData}/>} />
-        {/*<Route path="/add" element={<AddEventComponent />} />*/}
+        <Route path="/addevent" element={<AddEventComponent />} />
       </Routes>
     </div>
   );
