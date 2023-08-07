@@ -49,13 +49,13 @@ function Input(props) {
             {/* Input2: Start Day */}
             <div className="col-md-6 mb-3">
               <label htmlFor="start-date" className="form-label">Start date:</label>
-              <input type="date" className="form-control" id="start-date" name="startDate" value={startDate} onChange={handleStartDateChange} />
+              <input type="date" className="form-control" id="start-date" name="startDate" value={startDate} onChange={handleStartDateChange} required/>
             </div>
 
             {/* Input3: End Day */}
             <div className="col-md-6 mb-3">
               <label htmlFor="end-date" className="form-label">End date:</label>
-              <input type="date" className="form-control" id="end-date" name="endDate" value={endDate} onChange={handleEndDateChange} />
+              <input type="date" className="form-control" id="end-date" name="endDate" value={endDate} onChange={handleEndDateChange} required/>
             </div>
           </div>
 

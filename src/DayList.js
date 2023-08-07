@@ -46,7 +46,7 @@ const DayDefault = ({ flexevents, flexitineraries, dailyBudget, setDailyBudget, 
     <div className="flex-day">
       <div className="flex-items">
         <div className="flex-defaults">
-        <div className="flex-notes" onClick={handleNoteClick} onBlur={handleNoteBlur}>
+        <div className="flex-notes text-wrap" onClick={handleNoteClick} onBlur={handleNoteBlur}>
             <h4>Notes</h4>
             {editingNote ? (
               <textarea
