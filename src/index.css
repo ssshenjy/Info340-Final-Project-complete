@@ -43,13 +43,6 @@
     height: 100vh;
     background-position: center center;
   }
-
-  #addevent-image {
-    background-image: url('../public/img/sky.png');
-    background-size: cover;
-    height: 100vh;
-    background-position: center center;
-  }
   
   /* index.html specific */
   /* sidebar */

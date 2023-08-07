@@ -3,7 +3,7 @@ import React from 'react';
 function AddEventForm() {
   return (
     <div>
-        <main class="container mt-4 bg-image" id="addevent-image">
+        <main className="container mt-4">
         <form>
             <div className="mb-3">
             <label htmlFor="eventName" className="form-label">Event Name:</label>
