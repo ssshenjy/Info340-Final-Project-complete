@@ -29,14 +29,34 @@ const DayDefault = ({ flexevents, flexitineraries, dailyBudget, setDailyBudget, 
       const newDailyBudget = parseInt(event.target.value);
       setDailyBudget(newDailyBudget);
     };
+    const [noteContent, setNoteContent] = useState('Click to add notes');
+    const [editingNote, setEditingNote] = useState(false);
+  
+    const handleNoteClick = () => {
+      setEditingNote(true);
+    };
+    const handleNoteChange = (event) => {
+      setNoteContent(event.target.value);
+    };
+    const handleNoteBlur = () => {
+      setEditingNote(false);
+    };
 
   return (
     <div className="flex-day">
       <div className="flex-items">
         <div className="flex-defaults">
-          <div className="flex-notes">
+        <div className="flex-notes" onClick={handleNoteClick} onBlur={handleNoteBlur}>
             <h4>Notes</h4>
-            <p>Click to add notes</p>
+            {editingNote ? (
+              <textarea
+                value={noteContent}
+                onChange={handleNoteChange}
+                style={{ width: '100%', maxWidth: '100%', height: 'auto', resize: 'vertical' }}
+              />
+            ) : (
+              <p>{noteContent}</p>
+            )}
           </div>
           <div className="flex-budget">
             <h4>Budget</h4>

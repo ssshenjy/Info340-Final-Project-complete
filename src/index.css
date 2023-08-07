@@ -247,6 +247,10 @@
       margin-right: 10px;
       margin-top: 20px;
     }
+    .flex-notes {
+      word-wrap: break-word;
+      max-width: 50%;
+    }
   
     .flex-event,
     .flex-itinerary {
