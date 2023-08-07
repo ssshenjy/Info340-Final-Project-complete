@@ -1,8 +1,34 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, Link} from 'react-router-dom';
+import DayList from './DayList';
 
 function Planner(props) {
+  {/* Input.js - duration */}
+  const  duration  = 3;   {/*const { duration } = useParams();*/}
+  const dayNumbers = Array.from({ length: Number(duration) }, (_, index) => index + 1);
+  
+  {/* Input.js - budget*/}
+  const initialBudget = 1000; {/*const { initialBudget } = useParams();*/}
+  const [remainingBudget, setRemainingBudget] = useState(initialBudget);
+  const [dailyBudgets, setDailyBudgets] = useState(Array(duration).fill(0));
 
+  const handleDailyBudgetChange = (dayIndex, newDailyBudget) => {
+    const updatedDailyBudgets = [...dailyBudgets];
+    updatedDailyBudgets[dayIndex] = newDailyBudget;
+    setDailyBudgets(updatedDailyBudgets);
+
+    const updatedRemainingBudget = initialBudget - updatedDailyBudgets.reduce((total, budget) => total + budget, 0);
+    setRemainingBudget(updatedRemainingBudget);
+  };
+
+  const eventsForDay3 = [
+    { name: "Event 1", description: "Description for Event 1" },
+    { name: "Event 2", description: "Description for Event 2" },
+  ];
+  const itinerariesForDay3 = [
+    { id: 'completed', name: 'Completed Itinerary', description: 'Completed itinerary description.' },
+    { id: 'needs_attention', name: 'Lodging', description: 'You haven\'t planned this itinerary yet!' },
+  ];
   return (
     <div>
       {/* Navigation bar */}
@@ -97,22 +123,23 @@ function Planner(props) {
             </div>
             {/* Day 3 */}
             {/* what users will see in default */}
-            <div className="flex-day">
-              <h3>Day 3</h3>
-              <div className="flex-items">
-                <div className="flex-defaults">
-                    <div className="flex-notes">
-                    <h4>Notes</h4>
-                    <p>Click to add notes</p>
-                    </div>
-                    <div className="flex-budget">
-                    <h4>Budget</h4>
-                    <p>Daily Cost: $0</p>
-                    <p>Remaining Budget: $700</p>
-                    </div>
-                </div>
-              </div>
+            {dayNumbers.map((dayNumber, index) => (
+              <DayList 
+              key={dayNumber} 
+              dayNumber={dayNumber} 
+              flexevents={eventsForDay3} 
+              flexitineraries={itinerariesForDay3} 
+              dailyBudget={dailyBudgets[index]}
+              setDailyBudget={(newDailyBudget) => handleDailyBudgetChange(index, newDailyBudget)}
+
+              remainingBudget={remainingBudget}/>
+            ))}
+            <div className="remaining-budget">
+              <p>Remaining Budget: ${remainingBudget}</p>
             </div>
+
+
+
           </div>
         </div>
       </main>
