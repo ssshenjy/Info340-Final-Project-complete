@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useParams, Link} from 'react-router-dom';
 import DayList from './DayList';
 
@@ -9,17 +9,15 @@ function Planner(props) {
   const [duration, setDuration] = useState(3);
   const [dayNumbers, setDayNumbers] = useState(Array.from({ length: duration }, (_, index) => index + 1));
 
-  useEffect(() => {
-    if (startDate && endDate) {
-      const startDateCal = new Date(startDate);
-      const endDateCal = new Date(endDate);
-      const timeDifference = endDateCal - startDateCal;
-      const inputDuration = Math.ceil(timeDifference / (1000 * 60 * 60 * 24)) + 1;
+  if (startDate && endDate) {
+    const startDateCal = new Date(startDate);
+    const endDateCal = new Date(endDate);
+    const timeDifference = endDateCal - startDateCal;
+    const inputDuration = Math.ceil(timeDifference / (1000 * 60 * 60 * 24)) + 1;
     
-      setDuration(inputDuration);
-      setDayNumbers(Array.from({ length: inputDuration }, (_, index) => index + 1));
-    }
-  }, [startDate, endDate]);
+    setDuration(inputDuration);
+    setDayNumbers(Array.from({ length: inputDuration }, (_, index) => index + 1));
+  }
   
   {/* Input.js - budget*/}
   const initialBudget = budget; {/*const { initialBudget } = useParams();*/}
@@ -40,9 +38,19 @@ function Planner(props) {
     { name: "Event 2", description: "Description for Event 2" },
   ];
   const itinerariesForDay3 = [
-    { id: 'completed', name: 'Completed Itinerary', description: 'Completed itinerary description.' },
-    { id: 'needs_attention', name: 'Lodging', description: 'You haven\'t planned this itinerary yet!' },
+    { id: 'completed', name: 'Completed Itinerary', description: 'Completed itinerary description.', location: 'Some location' },
+    { id: 'needs_attention', name: 'Itinerary Needs Attention', description: '', location: '' },
   ];
+  const updatedItineraries = itinerariesForDay3.map((itinerary) => {
+    const isCompleted = itinerary.description || itinerary.location;
+    const description = isCompleted ? itinerary.description : "You haven't planned this itinerary yet!";
+    return {
+      ...itinerary,
+      id: isCompleted ? 'completed' : 'needs_attention',
+      description: description,
+    };
+  });
+
   return (
     <div>
       {/* Navigation bar */}
@@ -80,81 +88,18 @@ function Planner(props) {
               <h2 className="plan_name">{destination}</h2>
               <img src="img/delete.png" alt="delete_icon" className="delete-icon" />
             </div>
-            {/* Day 1 */}
-            <div className="flex-day">
-              {/* what users will see if an itinerary is added but not filled in */}
-              <h3>Day 1</h3>
-              <div className="flex-items">
-                <div className="flex-defaults">
-                    <div className="flex-notes">
-                    <h4>Notes</h4>
-                    <p>Click to add notes</p>
-                    </div>
-                    <div className="flex-budget">
-                    <h4>Budget</h4>
-                    <p>Daily Cost: $0</p>
-                    <p>Remaining Budget: $700</p>
-                    </div>
-                </div>
-                <div className="flex-itinerary" id="completed">
-                  <img src="img/delete.png" alt="delete_icon" className="delete-icon" />
-                  <h4>Flight</h4>
-                  <p>Flight Information</p>
-                </div>
-                <div className="flex-itinerary" id="needs_attention">
-                  <img src="img/delete.png" alt="delete_icon" className="delete-icon" />
-                  <h4>Lodging</h4>
-                  <p>You haven't planned this itinerary yet!</p>
-                </div>
-                <div className="flex-event">
-                  <img src="img/delete.png" alt="delete_icon" className="delete-icon" />
-                  <h4>Event: Pike Place Market</h4>
-                  <p>Seattle's original farmers market and the center of locally sourced, artisan, and specialty foods.</p>
-                </div>
-              </div>
-            </div>
-            {/* Day 2 */}
-            {/* what users will see if events are added */}
-            <div className="flex-day">
-              <h3>Day 2</h3>
-              <div className="flex-items">
-                <div className="flex-defaults">
-                        <div className="flex-notes">
-                        <h4>Notes</h4>
-                        <p>Click to add notes</p>
-                        </div>
-                        <div className="flex-budget">
-                        <h4>Budget</h4>
-                        <p>Daily Cost: $0</p>
-                        <p>Remaining Budget: $700</p>
-                        </div>
-                    </div>
-                <div className="flex-event" id="test">
-                  <img src="img/delete.png" alt="delete_icon" className="delete-icon" />
-                  <h4>Event: Pike Place Market</h4>
-                  <p>Seattle's original farmers market and the center of locally sourced, artisan, and specialty foods.</p>
-                </div>
-              </div>
-            </div>
-            {/* Day 3 */}
-            {/* what users will see in default */}
+
             {dayNumbers.map((dayNumber, index) => (
               <DayList 
               key={dayNumber} 
               dayNumber={dayNumber} 
               flexevents={eventsForDay3} 
-              flexitineraries={itinerariesForDay3} 
+              flexitineraries={updatedItineraries} 
               dailyBudget={dailyBudgets[index]}
               setDailyBudget={(newDailyBudget) => handleDailyBudgetChange(index, newDailyBudget)}
 
               remainingBudget={remainingBudget}/>
             ))}
-            <div className="remaining-budget">
-              <p>Remaining Budget: ${remainingBudget}</p>
-            </div>
-
-
-
           </div>
         </div>
       </main>
