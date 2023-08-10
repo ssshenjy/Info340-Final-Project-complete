@@ -1,12 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { csv } from 'd3-fetch';
 
 function Input(props) {
     const [destination, setDestination] = useState('');
+    const [destinationData, setDestinationData] = useState([]);
     const [budget, setBudget] = useState(0);
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [endDateError, setEndDateError] = useState('');
+
+    useEffect(() => {
+      csv('/state-abbrevs.csv')
+        .then((data) => {
+          setDestinationData(data);
+        })
+        .catch((error) => {
+          console.error('Error loading CSV file:', error);
+        });
+    }, []);
 
     const handleDestinationChange = (e) => {
       setDestination(e.target.value);
@@ -57,9 +69,13 @@ function Input(props) {
           {/* Input1: Destination */}
           <div className="mb-3">
             <label htmlFor="destination" className="form-label">Destination:</label>
-            <input type="text" className="form-control" id="destination" name="destination" placeholder="Enter your destination" value={destination} onChange={handleDestinationChange}/>
+            <select className="form-control" id="destination" name="destination" value={destination} onChange={handleDestinationChange}>
+            <option value="">Select a state</option>
+              {destinationData.map((stateData) => (
+                <option key={stateData.state} value={stateData.state}> {stateData.state} </option>
+            ))}
+          </select>
           </div>
-          
 
           <div className="row">
             {/* Input2: Start Day */}
