@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // Form Input Component
 function FormInput({ id, name, type = "text", label, required = false }) {
@@ -46,12 +46,27 @@ function Footer() {
 
 // Main AddEventForm Component
 function AddEventForm() {
+  const [events, setEvents] = useState([]);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.target);
+    const newEvent = {};
+
+    formData.forEach((value, key) => {
+      newEvent[key] = value;
+    });
+    setEvents([...events, newEvent]);
+    console.log(events);
+    event.target.reset();
+  };
+
   return (
     <div>
       <main className="container mt-4">
-        <form>
+        <form onSubmit={handleSubmit}>
           <FormInput id="eventName" name="eventName" label="Event Name:" required />
           <FormInput id="eventDate" name="eventDate" type="date" label="Event Date:" required />
+          <FormInput id="eventDay" name="eventDay" type="day" label="Event Day:" />
           <FormInput id="eventTime" name="eventTime" type="time" label="Event Time:" />
           <FormInput id="location" name="location" label="Location:" />
           <FormTextarea id="description" name="description" label="Description:" />
