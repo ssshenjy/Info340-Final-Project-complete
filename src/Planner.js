@@ -4,6 +4,12 @@ import DayList from './DayList';
 
 function Planner(props) {
   const { destination, startDate, endDate, budget } = props.tripData || {};
+  const [planDeleted, setPlanDeleted] = useState(false);
+
+  {/* delete entire plan */}
+  const deletePlan = () => {
+    setPlanDeleted(true);
+  };
 
   {/* Input.js - duration */}
   const [duration, setDuration] = useState(3);
@@ -81,27 +87,28 @@ function Planner(props) {
 
           {/* Main page */}
           <div className="mainbar">
-            <Link to="/addevent" className="add-event">
-              <span>Add Event</span>
-            </Link>
-
-            {/* Plan Title */}
-            <div className="plan_header">
-              <h2 className="plan_name">{destination}</h2>
-              <img src="img/delete.png" alt="delete_icon" className="delete-icon" />
-            </div>
-
-            {dayNumbers.map((dayNumber, index) => (
-              <DayList 
-              key={dayNumber} 
-              dayNumber={dayNumber} 
-              flexevents={eventsForDay3} 
-              flexitineraries={updatedItineraries} 
-              dailyBudget={dailyBudgets[index]}
-              setDailyBudget={(newDailyBudget) => handleDailyBudgetChange(index, newDailyBudget)}
-
-              remainingBudget={remainingBudget}/>
-            ))}
+            { planDeleted ? (
+                <div className="plan-deleted-message">
+                    The plan has been deleted.
+                </div>
+            ) : (
+                <>
+                    <Link to="/addevent" className="add-event">
+                        <span>Add Event</span>
+                    </Link>
+                    {dayNumbers.map((dayNumber, index) => (
+                        <DayList 
+                            key={dayNumber} 
+                            dayNumber={dayNumber} 
+                            flexevents={eventsForDay3} 
+                            flexitineraries={updatedItineraries} 
+                            dailyBudget={dailyBudgets[index]}
+                            setDailyBudget={(newDailyBudget) => handleDailyBudgetChange(index, newDailyBudget)}
+                            remainingBudget={remainingBudget}
+                        />
+                    ))}
+                </>
+            )}
           </div>
         </div>
       </main>
