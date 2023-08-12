@@ -108,15 +108,6 @@ function Input(props) {
           <Link to="/planner" className="btn btn-primary">Start the trip</Link>
         )}
       </main>
-
-      <footer className="bg-light py-3 mt-5">
-        <div className="container text-center">
-          <p>&copy; 2023 Journemo. All rights reserved.</p>
-          <p id="contact">
-            Contact Us: <a href="mailto:info@journemo.com"><span className="material-icons"></span>info@journemo.com</a>
-          </p>
-        </div>
-      </footer>
     </div>
   );
 }

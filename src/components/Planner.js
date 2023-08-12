@@ -113,13 +113,6 @@ function Planner(props) {
                     The plan has been deleted.
                 </div>
             )}
-
-            <footer>
-                <p>&copy; 2023 Journemo. All rights reserved.</p>
-                <p>
-                    Contact Us: <a href="mailto:info@journemo.com"><span className="material-icons"></span>info@journemo.com</a>
-                </p>
-            </footer>
         </div>
     );
 }

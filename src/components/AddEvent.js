@@ -44,8 +44,8 @@ function Footer() {
   );
 }
 
-// Main AddEventForm Component
-function AddEventForm() {
+// Main AddEvent Component
+function AddEvent() {
   const [events, setEvents] = useState([]);
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -79,5 +79,5 @@ function AddEventForm() {
   );
 }
 
-export default AddEventForm;
+export default AddEvent;
 

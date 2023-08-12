@@ -64,16 +64,6 @@ function CallToAction() {
   );
 }
 
-// Footer
-function Footer() {
-  return (
-    <footer className="bg-light py-3 mt-5">
-      <div className="container text-center">
-        <p>&copy; 2023 Journemo. All rights reserved.</p>
-      </div>
-    </footer>
-  );
-}
 
 // Main Introduction Component
 function Introduction(props) {
@@ -84,7 +74,6 @@ function Introduction(props) {
         <FeaturesSection />
         <CallToAction />
       </main>
-      <Footer />
     </div>
   );
 }
