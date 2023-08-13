@@ -17,6 +17,12 @@ function App(props) {
     budget: 0,
 });
 
+const [plans, setPlans] = useState([]);
+
+  const addPlan = (newPlan) => {
+    setPlans([...plans, newPlan]);
+  };
+
   return (
     <div>
       <Nav />
@@ -25,8 +31,8 @@ function App(props) {
       <Routes>
         <Route path="/" element={<Introduction />} />
         <Route path="/introduction" element={<Introduction />} />
-        <Route path="/input" element={<Input setTripData={setTripData}/>} />
-        <Route path="/planner" element={<Planner tripData={tripData}/>} />
+        <Route path="/input" element={<Input setTripData={setTripData} addPlan={addPlan}/>} />
+        <Route path="/planner" element={<Planner tripData={tripData} plans={plans}/>} />
         <Route path="/addevent" element={<AddEvent />} />
       </Routes>
       <footer className="bg-light py-3 mt-5">

@@ -11,6 +11,8 @@ function Input(props) {
     const [endDateError, setEndDateError] = useState('');
     const [formSubmitted, setFormSubmitted] = useState(false);
 
+    const newPlan = { destination, startDate, endDate, budget };
+
     useEffect(() => {
       csv('/state-abbrevs.csv')
         .then((data) => {
@@ -50,6 +52,7 @@ function Input(props) {
       e.preventDefault();
       if (!endDateError) {
         props.setTripData({destination,startDate, endDate, budget});
+        props.addPlan({ destination, startDate, endDate, budget });
         setFormSubmitted(true);
       }
     };
