@@ -23,6 +23,17 @@ const [plans, setPlans] = useState([]);
     setPlans([...plans, newPlan]);
   };
 
+  const [events, setEvents] = useState({
+    dayNumber: '',
+    eventName: '',
+    location: '',
+    description: '',
+  });
+
+  const addEvent = (newEvent) => {
+    setEvents([...events, newEvent]);
+  };
+
   return (
     <div>
       <Nav />
@@ -33,7 +44,7 @@ const [plans, setPlans] = useState([]);
         <Route path="/introduction" element={<Introduction />} />
         <Route path="/input" element={<Input setTripData={setTripData} addPlan={addPlan}/>} />
         <Route path="/planner" element={<Planner tripData={tripData} plans={plans}/>} />
-        <Route path="/addevent" element={<AddEvent />} />
+        <Route path="/addevent" element={<AddEvent setEventData={setEvents} addEvent={addEvent}/>} />
       </Routes>
       <footer className="bg-light py-3 mt-5">
         <div className="container text-center">
