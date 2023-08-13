@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { csv } from 'd3-fetch';
 
 function Input(props) {
@@ -9,6 +9,7 @@ function Input(props) {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [endDateError, setEndDateError] = useState('');
+    const [formSubmitted, setFormSubmitted] = useState(false);
 
     useEffect(() => {
       csv('/state-abbrevs.csv')
@@ -47,11 +48,10 @@ function Input(props) {
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      if (endDateError) {
-        return;
-    }
-      props.setTripData({destination,startDate, endDate, budget});
-      
+      if (!endDateError) {
+        props.setTripData({destination,startDate, endDate, budget});
+        setFormSubmitted(true);
+      }
     };
 
 
@@ -103,9 +103,10 @@ function Input(props) {
         {endDateError && (
         <p className="text-danger">Please correct the errors before starting the trip!</p>
         )}
-
-        {!endDateError && (
+        {formSubmitted ? (
           <Link to="/planner" className="btn btn-primary">Start the trip</Link>
+        ) : (
+          <p>Please confirm your information before starting the trip.</p>
         )}
       </main>
     </div>
