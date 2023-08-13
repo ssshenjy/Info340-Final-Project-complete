@@ -62,10 +62,10 @@ function AddEvent() {
 
   return (
     <div>
-      <main className="container mt-4">
+      <main className="container mt-4 bg-sky">
+        <h1>Add a New Event!</h1>
         <form onSubmit={handleSubmit}>
           <FormInput id="eventName" name="eventName" label="Event Name:" required />
-          <FormInput id="eventDate" name="eventDate" type="date" label="Event Date:" required />
           <FormInput id="eventDay" name="eventDay" type="day" label="Event Day:" />
           <FormInput id="eventTime" name="eventTime" type="time" label="Event Time:" />
           <FormInput id="location" name="location" label="Location:" />

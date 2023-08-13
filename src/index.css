@@ -43,6 +43,13 @@
     height: 100vh;
     background-position: center center;
   }
+
+  .bg-sky {
+    background-image: url('../public/img/sky.png');
+    background-size: cover;
+    height: 100vh;
+    background-position: center center;
+  }
   
   /* index.html specific */
   /* sidebar */
