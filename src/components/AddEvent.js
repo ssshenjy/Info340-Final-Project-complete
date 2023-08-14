@@ -1,8 +1,8 @@
 import { React, useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 
-// Main AddEventForm Component
-function AddEventForm(props) {
+// Main AddEvent Component
+function AddEvent(props) {
   const [currentDate, setCurrentDate] = useState('');
   const [eventName, setEventName] = useState('');
   const [location, setLocation] = useState('');
@@ -98,4 +98,4 @@ function AddEventForm(props) {
   );
 }
 
-export default AddEventForm;
+export default AddEvent;

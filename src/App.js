@@ -46,7 +46,11 @@ const [plans, setPlans] = useState([]);
         <Route path="/" element={<Introduction />} />
         <Route path="/introduction" element={<Introduction />} />
         <Route path="/input" element={<Input setTripData={setTripData} addPlan={addPlan}/>} />
-        <Route path="/planner" element={<Planner tripData={tripData} plans={plans} events={events} />} />
+        {plans.length > 0 ? (
+          <Route path="/planner/:destination" element={<Planner tripData={tripData} plans={plans} events={events} />} />
+        ) : (
+          <Route path="/planner" element={<Planner tripData={tripData} plans={plans} events={events} />} />
+        )}
         <Route path="/addevent" element={<AddEvent addEvent={addEvent} />} />
       </Routes>
       <footer className="bg-light py-3 mt-5">

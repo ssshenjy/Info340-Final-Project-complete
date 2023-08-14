@@ -73,8 +73,8 @@ function Planner(props) {
                                 </div>
                                 {props.plans.map((plan, index) => (
                                     <div key={index} className="flex-item">
-                                    <Link to={`/planner/${plan.destination}`}>
-                                        <img src="img/travel-bag.png" alt="plan_icon" />
+                                    <Link to={'/planner/' + plan.destination}>
+                                        <img src="/img/travel-bag.png" alt="plan_icon" />
                                         <span>{plan.destination || 'Start your First Plan'}</span>
                                     </Link>
                                     </div>
@@ -82,7 +82,7 @@ function Planner(props) {
                                
                                 <div className="flex-item">
                                     <Link to="/input">
-                                        <img src="img/add.png" alt="add_icon" />
+                                        <img src="/img/add.png" alt="add_icon" />
                                         <span>Add New Plan</span>
                                     </Link>
                                 </div>
