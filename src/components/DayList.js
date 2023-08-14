@@ -13,10 +13,11 @@ const DayEvent = ({ flexevent, onDelete }) => {
 };
 
   const DayItinerary = ({ itinerary, onDelete }) => {
+    const isItinerary = itinerary.id === 'completed';
     const itineraryClass = itinerary.id === 'completed' ? 'flex-itinerary completed' : 'flex-itinerary needs-attention';
     return (
       <div className={itineraryClass} id={itinerary.id}>
-        <input type="checkbox" />
+        {isItinerary && <input type="checkbox" />}
         <img src="/img/delete.png" alt="delete_icon" className="delete-icon" onClick={onDelete} />
         <h3>Itinerary:</h3>
         <h4>{itinerary.EventName}</h4>
@@ -79,7 +80,7 @@ const DayDefault = ({ initialFlexevents, initialFlexitineraries, dailyBudget, se
           </div>
         </div>
         {(flexitinerariesState || []).map((itinerary, index) => (
-          <DayItinerary key={index} itinerary={itinerary} onDelete={() => deleteItinerary(index)} />
+          <DayItinerary key={index} itinerary={{ ...itinerary, id: 'completed' }} onDelete={() => deleteItinerary(index)} />
         ))}
 
         {(flexeventsState || []).map((flexevent, index) => (

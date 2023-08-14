@@ -28,7 +28,7 @@ function AddEvent(props) {
   };
 
   const itineraryChange = (e) => {
-    setItinerary(e.target.checked)
+    setItinerary(e.target.checked);
   }
 
   const handleSubmit = (e) => {
