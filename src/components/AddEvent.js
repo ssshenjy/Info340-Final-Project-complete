@@ -1,8 +1,8 @@
 import { React, useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 
-// Main AddEventForm Component
-function AddEventForm(props) {
+// Main AddEvent Component
+function AddEvent(props) {
   const [dayNumber, setDayNumber] = useState('');
   const [eventName, setEventName] = useState('');
   const [location, setLocation] = useState('');
@@ -99,4 +99,4 @@ function AddEventForm(props) {
   );
 }
 
-export default AddEventForm;
+export default AddEvent;
