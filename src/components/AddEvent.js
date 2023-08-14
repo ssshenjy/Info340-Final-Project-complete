@@ -10,7 +10,7 @@ function AddEvent(props) {
   const [isLinkEnabled, setIsLinkEnabled] = useState(false);
   const [showErrorMessage, setShowErrorMessage] = useState(false);
   const [itinerary, setItinerary] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleDateChange = (e) => {
     setCurrentDate(e.target.value);
