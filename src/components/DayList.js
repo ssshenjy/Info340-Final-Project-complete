@@ -93,7 +93,7 @@ const DayDefault = ({ initialFlexevents, initialFlexitineraries, dailyBudget, se
 const DayList = ({ dayNumber, flexevents, flexitineraries, dailyBudget, setDailyBudget, remainingBudget }) => {
   return (
     <div className="flex-day">
-      <h3>Day {dayNumber.curDate}</h3>
+      <h3>Day {dayNumber.curDate} ({dayNumber.plannerDate})</h3>
       <DayDefault 
           initialFlexevents={flexevents} 
           initialFlexitineraries={flexitineraries} 
