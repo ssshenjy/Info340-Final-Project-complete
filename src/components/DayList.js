@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const DayEvent = ({ flexevent, onDelete }) => {
     return (
       <div className="flex-event">
-        <img src="img/delete.png" alt="delete_icon" className="delete-icon" onClick={onDelete} />
+        <img src="/img/delete.png" alt="delete_icon" className="delete-icon" onClick={onDelete} />
         <h4>{flexevent.name}</h4>
         <p>{flexevent.location}</p>
         <p>{flexevent.description}</p>
@@ -15,7 +15,7 @@ const DayEvent = ({ flexevent, onDelete }) => {
     const itineraryClass = itinerary.id === 'completed' ? 'flex-itinerary completed' : 'flex-itinerary needs-attention';
     return (
       <div className={itineraryClass} id={itinerary.id}>
-        <img src="img/delete.png" alt="delete_icon" className="delete-icon" onClick={onDelete} />
+        <img src="/img/delete.png" alt="delete_icon" className="delete-icon" onClick={onDelete} />
         <h3>Itinerary:</h3>
         <h4>{itinerary.EventName}</h4>
         <p>{itinerary.description}</p>
