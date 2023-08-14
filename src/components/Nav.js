@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-export function Nav() {
+export function Nav({ plans, destination }) {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container">
@@ -13,7 +13,11 @@ export function Nav() {
           <ul className="navbar-nav ml-auto">
             <li className="nav-item"><NavLink to="/Input" className="nav-link">Start</NavLink></li>
             <li className="nav-item"><NavLink to="/AddEvent" className="nav-link">Add</NavLink></li>
-            <li className="nav-item"><NavLink to="/Planner" className="nav-link">Plan</NavLink></li>
+            {plans.length > 0 ? (
+              <li className="nav-item"><NavLink to={"/planner/" + destination} className="nav-link">Plan</NavLink></li>
+            ) : (
+              <li className="nav-item"><NavLink to="/planner" className="nav-link">Plan</NavLink></li>
+            )}
           </ul>
         </div>
       </div>

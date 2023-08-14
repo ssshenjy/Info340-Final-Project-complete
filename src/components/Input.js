@@ -11,8 +11,6 @@ function Input(props) {
     const [endDateError, setEndDateError] = useState('');
     const [formSubmitted, setFormSubmitted] = useState(false);
 
-    const newPlan = { destination, startDate, endDate, budget };
-
     useEffect(() => {
       csv('/state-abbrevs.csv')
         .then((data) => {
@@ -107,7 +105,7 @@ function Input(props) {
         <p className="text-danger">Please correct the errors before starting the trip!</p>
         )}
         {formSubmitted ? (
-          <Link to="/planner" className="btn btn-primary">Start the trip</Link>
+          <Link to={"/planner/" + destination} className="btn btn-primary">Start the trip</Link>
         ) : (
           <p>Please confirm your information before starting the trip.</p>
         )}

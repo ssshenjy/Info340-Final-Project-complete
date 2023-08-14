@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import DayList from './DayList';
 
 function Planner(props) {
-    const { destination, startDate, endDate, budget } = props.tripData || {};
+    const { destination } = useParams();
+    const { tripData, plans } = props;
+    
+    const selectedPlan = plans.find(plan => plan.destination === destination);
+
+    const { startDate, endDate, budget } = selectedPlan || tripData;
     const [planDeleted, setPlanDeleted] = useState(false);
 
     const deletePlan = () => {
