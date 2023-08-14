@@ -51,7 +51,7 @@ const [plans, setPlans] = useState([]);
         ) : (
           <Route path="/planner" element={<Planner tripData={tripData} plans={plans} events={events} />} />
         )}
-        <Route path="/addevent" element={<AddEvent addEvent={addEvent} destination={tripData.destination}/>} />
+        <Route path="/addevent" element={<AddEvent addEvent={addEvent} destination={tripData.destination} tripData={{startDate: tripData.startDate, endDate: tripData.endDate}}/>} />
       </Routes>
       <footer className="bg-light py-3 mt-5">
         <div className="container text-center">

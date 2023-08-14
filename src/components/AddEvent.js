@@ -62,7 +62,7 @@ function AddEvent(props) {
             <label htmlFor="currentDate" className="form-label">Event Date:</label>
            
 
-            <input type="date" className="form-control" id="current-date" name="current-date"  onChange={handleDateChange} required/>
+            <input type="date" className="form-control" id="current-date" name="current-date"  onChange={handleDateChange} required min={props.tripData.startDate} max={props.tripData.endDate}/>
           </div>
 
           <div className="mb-3">
