@@ -1,18 +1,19 @@
 import { React, useState, useEffect} from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
-// Main AddEvent Component
-function AddEvent(props) {
-  const [dayNumber, setDayNumber] = useState('');
+// Main AddEventForm Component
+function AddEventForm(props) {
+  const [currentDate, setCurrentDate] = useState('');
   const [eventName, setEventName] = useState('');
   const [location, setLocation] = useState('');
   const [description, setDescription] = useState('');
   const [isLinkEnabled, setIsLinkEnabled] = useState(false);
   const [showErrorMessage, setShowErrorMessage] = useState(false);
+  const [itinerary, setItinerary] = useState(false);
+  const navigate = useNavigate()
 
-
-  const handleDayNumberChange = (e) => {
-    setDayNumber(e.target.value);
+  const handleDateChange = (e) => {
+    setCurrentDate(e.target.value);
   };
 
   const handleEventNameChange = (e) => {
@@ -26,13 +27,17 @@ function AddEvent(props) {
     setDescription(e.target.value);
   };
 
-  
+  const itineraryChange = (e) => {
+    setItinerary(e.target.checked)
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    if (dayNumber && eventName && location && description) {
-      props.addEvent(dayNumber, eventName, location, description);
+    if (currentDate && eventName && location && description) {
+      props.addEvent(currentDate, eventName, location, description, itinerary);
+      if (isLinkEnabled) {
+        navigate('/Planner')
+      }
       setIsLinkEnabled(false);
       setShowErrorMessage(false);
     } else {
@@ -41,12 +46,12 @@ function AddEvent(props) {
   };
 
   useEffect(() => {
-    if (dayNumber && eventName && location && description) {
+    if (currentDate && eventName && location && description) {
       setIsLinkEnabled(true);
     } else {
       setIsLinkEnabled(false);
     }
-  }, [dayNumber, eventName, location, description]);
+  }, [currentDate, eventName, location, description]);
  
   return (
     <div>
@@ -54,8 +59,10 @@ function AddEvent(props) {
         <h1>Add a New Event!</h1>
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
-            <label htmlFor="dayNumber" className="form-label">Event Number:</label>
-            <input type="number" className="form-control" id="dayNumber" name="dayNumber" placeholder="Type a day number" onChange={handleDayNumberChange} required></input>
+            <label htmlFor="currentDate" className="form-label">Event Date:</label>
+           
+
+            <input type="date" className="form-control" id="current-date" name="current-date"  onChange={handleDateChange} required/>
           </div>
 
           <div className="mb-3">
@@ -75,23 +82,15 @@ function AddEvent(props) {
           </div>
           
           <div className="mb-3 form-check">
-            <input type="checkbox" className="form-check-input" id="itinerary" name="itinerary" />
+            <input type="checkbox" className="form-check-input" id="itinerary" name="itinerary" onChange={itineraryChange} />
             <label className="form-check-label" htmlFor="itinerary">Is It An Itinerary?</label>
           </div>
 
           {showErrorMessage && <p style={{ color: 'red' }}>Please fill out all the blanks.</p>}
-
-          {isLinkEnabled ? (
-            <Link to="/Planner">
-              <button type="submit" className="btn btn-primary">
-                Add Event
-              </button>
-            </Link>
-          ) : (
             <button onClick={handleSubmit} type="submit" className="btn btn-primary">
               Add Event
             </button>
-          )}
+          {/* )} */}
         </form>
         
       </main>
@@ -99,4 +98,4 @@ function AddEvent(props) {
   );
 }
 
-export default AddEvent;
+export default AddEventForm;
