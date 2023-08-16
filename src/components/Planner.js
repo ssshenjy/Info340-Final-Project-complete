@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import dayjs from 'dayjs';
 import DayList from './DayList';
 
@@ -68,12 +69,13 @@ function Planner(props) {
                         <div className="containerIndex">
                             <div className="sidebar">
                                 <div className="flex-item">
-                                    <img src="img/menu.png" alt="menu_icon" id="menu" />
+                                    <img src="/img/menu.png" alt="menu_icon" id="menu" />
                                     <h2>Choose Plan</h2>
                                 </div>
                                 {props.plans.map((plan, index) => (
                                     <div key={index} className="flex-item">
                                     <Link to={'/planner/' + plan.destination}>
+                                        <FontAwesomeIcon icon={['fas', 'suitcase']} className="icon" />
                                         <img src="/img/travel-bag.png" alt="plan_icon" />
                                         <span>{plan.destination || 'Start your First Plan'}</span>
                                     </Link>
@@ -95,7 +97,7 @@ function Planner(props) {
 
                                 <div className="plan_header">
                                     <h2 className="plan_name">{destination}</h2>
-                                    <img src="img/delete.png" alt="delete_icon" className="delete-icon" onClick={deletePlan} />
+                                    <img src="/img/delete.png" alt="delete_icon" className="delete-icon" onClick={deletePlan} />
                                 </div>
 
                                 {dayNumbers.map((dayNumber, index) => (
