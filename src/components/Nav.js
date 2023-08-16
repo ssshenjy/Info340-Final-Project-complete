@@ -10,10 +10,14 @@ export function Nav() {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav ml-auto">
+          <ul className="navbar-nav me-auto">  {/* Changed from ml-auto to me-auto */}
             <li className="nav-item"><NavLink to="/Input" className="nav-link">Start</NavLink></li>
             <li className="nav-item"><NavLink to="/AddEvent" className="nav-link">Add</NavLink></li>
             <li className="nav-item"><NavLink to="/Planner" className="nav-link">Plan</NavLink></li>
+          </ul>
+          <ul className="navbar-nav">  {/* New UL for Sign Up and Log In */}
+            <li className="nav-item"><NavLink to="/SignUp" className="nav-link">Sign Up</NavLink></li>
+            <li className="nav-item"><NavLink to="/LogIn" className="nav-link">Log In</NavLink></li>
           </ul>
         </div>
       </div>
