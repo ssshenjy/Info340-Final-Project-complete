@@ -8,6 +8,8 @@ import Introduction from './components/Introduction';
 import Input from './components/Input';
 import Planner from './components/Planner';
 import AddEvent from './components/AddEvent';
+import LogIn from './components/LogIn';  
+import SignUp from './components/SignUp';
 
 function App(props) {
   const [tripData, setTripData] = useState({
@@ -15,9 +17,9 @@ function App(props) {
     startDate: '',
     endDate: '',
     budget: 0,
-});
+  });
 
-const [plans, setPlans] = useState([]);
+  const [plans, setPlans] = useState([]);
 
   const addPlan = (newPlan) => {
     setPlans([...plans, newPlan]);
@@ -37,6 +39,8 @@ const [plans, setPlans] = useState([]);
     setEvents([...events, newEvent]);
   };
 
+  
+
   return (
     <div>
       <Nav />
@@ -44,6 +48,8 @@ const [plans, setPlans] = useState([]);
       {/* Define your routes using the Routes component */}
       <Routes>
         <Route path="/" element={<Introduction />} />
+        <Route path="/LogIn" element={<LogIn />} />
+        <Route path="/SignUp" element={<SignUp />} />
         <Route path="/introduction" element={<Introduction />} />
         <Route path="/input" element={<Input setTripData={setTripData} addPlan={addPlan}/>} />
         {plans.length > 0 ? (

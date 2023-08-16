@@ -1,6 +1,3 @@
-// import { Button } from 'react-bootstrap';
-// import _ from 'lodash';
-// import { useParams } from 'react-router-dom';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
@@ -58,12 +55,11 @@ function CallToAction() {
     <section className="row mt-5">
       <div className="col-lg-12 text-center">
         <h2>Ready to start your adventure?</h2>
-        <a href="#signup" className="btn btn-primary btn-lg">Sign Up for free</a>
+        <Link to="/signup" className="btn btn-primary btn-lg">Sign Up for Free</Link>
       </div>
     </section>
   );
 }
-
 
 // Main Introduction Component
 function Introduction(props) {
