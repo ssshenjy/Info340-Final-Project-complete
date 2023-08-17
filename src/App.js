@@ -2,6 +2,7 @@ import React from 'react';
 import { Nav } from './components/Nav';
 import { Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
+import { initializeApp } from "firebase/app";
 
 
 import Introduction from './components/Introduction';
@@ -38,6 +39,18 @@ function App(props) {
 
     setEvents([...events, newEvent]);
   };
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyCF3W2sL5iKty6MxkBQ1_C-UXeyp6I1qW0",
+    authDomain: "info340-travel-planner.firebaseapp.com",
+    projectId: "info340-travel-planner",
+    storageBucket: "info340-travel-planner.appspot.com",
+    messagingSenderId: "368458909257",
+    appId: "1:368458909257:web:8d6936f1dd724ec801e198",
+    measurementId: "G-YEHYKWKQ9E"
+  };
+
+  initializeApp(firebaseConfig);
 
   
 
