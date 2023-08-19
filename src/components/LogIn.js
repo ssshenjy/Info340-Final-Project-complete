@@ -1,59 +1,53 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
 
-function LogIn() {
+const LogIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
+  const [error, setError] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(false); // Track login status
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-
-    const auth = getAuth();
+    setError(null);
 
     try {
+      const auth = getAuth();
       await signInWithEmailAndPassword(auth, email, password);
-      console.log("User logged in successfully!");
-
-      // Redirect to the introduction page after successful login
-      navigate('/introduction');
-      
+      setLoggedIn(true); // Set login status to true after successful login
     } catch (error) {
-      console.error("Error logging in:", error.message);
+      setError(error.message);
     }
   };
 
   return (
     <div>
-      <h2>Log In</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email:
-          <input 
-            type="email" 
-            name="email" 
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </label>
-        <label>
-          Password:
-          <input 
-            type="password" 
-            name="password" 
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
+      <h2>Login</h2>
+      <form onSubmit={handleLogin}>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
         <button type="submit">Log In</button>
       </form>
+      {error && <p>{error}</p>}
+      {/* Conditionally render Link component based on login status */}
+      {loggedIn ? (
+        <p>Successfully logged in! Click to be redirected to start a plan <Link to="/input">/input</Link>...</p>
+      ) : (
+        <p>Don't have an account? <Link to="/SignUp">Sign Up</Link></p>
+      )}
     </div>
   );
-}
+};
 
 export default LogIn;
-
-
-
-

@@ -1,65 +1,53 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
-import { getDatabase, ref, set as firebaseSet } from 'firebase/database';
-import { useNavigate } from 'react-router-dom';
 
-function SignUp() {
+const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();  // Get the navigate function
+  const [error, setError] = useState(null);
+  const [signedUp, setSignedUp] = useState(false); // Track sign-up status
 
-  const handleSubmit = async (e) => {
+  const handleSignUp = async (e) => {
     e.preventDefault();
-
-    const auth = getAuth(); 
+    setError(null);
 
     try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
-
-      // Save the user data in Firebase Realtime Database
-      const db = getDatabase();
-      const userRef = ref(db, `users/${user.uid}`);
-      await firebaseSet(userRef, {
-        email: user.email
-      });
-
-      console.log("User registered and data saved successfully!");
-
-      // Redirect to the introduction page
-      navigate('/introduction');
-
+      const auth = getAuth();
+      await createUserWithEmailAndPassword(auth, email, password);
+      setSignedUp(true); // Set sign-up status to true after successful sign-up
     } catch (error) {
-      console.error("Error:", error.message);
+      setError(error.message);
     }
   };
 
   return (
     <div>
       <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email:
-          <input 
-            type="email" 
-            name="email" 
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </label>
-        <label>
-          Password:
-          <input 
-            type="password" 
-            name="password" 
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
+      <form onSubmit={handleSignUp}>
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
         <button type="submit">Sign Up</button>
       </form>
+      {error && <p>{error}</p>}
+      {/* Conditionally render success message and redirect link */}
+      {signedUp ? (
+        <p>Successfully signed up! Redirecting to <Link to="/LogIn">Log In</Link>...</p>
+      ) : (
+        <p>Already have an account? <Link to="/LogIn">Log In</Link></p>
+      )}
     </div>
   );
-}
+};
 
 export default SignUp;
