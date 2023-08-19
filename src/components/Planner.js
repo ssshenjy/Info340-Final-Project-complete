@@ -8,15 +8,14 @@ function Planner(props) {
     const { destination, startDate, endDate, budget } = props.tripData || {};
 
     const [planDeleted, setPlanDeleted] = useState(false);
+    const [duration, setDuration] = useState(3);
+    const [dayNumbers, setDayNumbers] = useState(Array.from({ length: duration }, (_, index) => index + 1));
 
     const deletePlan = () => {
         if (window.confirm("Are you sure you want to delete this plan?")) {
             setPlanDeleted(true);
         }
     };
-
-    const [duration, setDuration] = useState(3);
-    const [dayNumbers, setDayNumbers] = useState(Array.from({ length: duration }, (_, index) => index + 1));
 
     useEffect(() => {
         if (startDate && endDate) {
@@ -25,7 +24,6 @@ function Planner(props) {
             const timeDifference = endDateCal - startDateCal;
             const inputDuration = Math.ceil(timeDifference / (1000 * 60 * 60 * 24)) + 1;
 
-    
             setDuration(inputDuration);
           
             setDayNumbers(Array.from({ length: inputDuration }, (_, index) => {
@@ -92,40 +90,36 @@ function Planner(props) {
     return (
         <div>
             {!planDeleted ? (
-                <>
-                    <main>
-                        <div className="containerIndex">
-                            <div className="sidebar">
-                                <div className="flex-item">
-                                    <img src="/img/menu.png" alt="menu_icon" id="menu" />
-                                    <h2>Choose Plan</h2>
-                                </div>
-                                {planLinks}
-                               
-                                <div className="flex-item">
-                                    <Link to="/input">
-                                        <img src="/img/add.png" alt="add_icon" />
-                                        <span>Add New Plan</span>
-                                    </Link>
-                                </div>
+                <main>
+                    <div className="containerIndex">
+                        <div className="sidebar">
+                            <div className="flex-item">
+                                <img src="/img/menu.png" alt="menu_icon" id="menu" />
+                                <h2>Choose Plan</h2>
                             </div>
-
-                            <div className="mainbar">
-                                <Link to="/addevent" className="add-event">
-                                    <span>Add Event</span>
+                            {planLinks}
+                            
+                            <div className="flex-item">
+                                <Link to="/input">
+                                    <img src="/img/add.png" alt="add_icon" />
+                                    <span>Add New Plan</span>
                                 </Link>
-
-                                <div className="plan_header">
-                                    <h2 className="plan_name">{destination}</h2>
-                                    <img src="/img/delete.png" alt="delete_icon" className="delete-icon" onClick={deletePlan} />
-                                </div>
-                                {dayLists}
                             </div>
-
-                           
                         </div>
-                    </main>
-                </>
+
+                        <div className="mainbar">
+                            <Link to="/addevent" className="add-event">
+                                <span>Add Event</span>
+                            </Link>
+
+                            <div className="plan_header">
+                                <h2 className="plan_name">{destination}</h2>
+                                <img src="/img/delete.png" alt="delete_icon" className="delete-icon" onClick={deletePlan} />
+                            </div>
+                            {dayLists}
+                        </div>
+                    </div>
+                </main>
             ) : (
                 <div className="plan-deleted-message">
                     The plan has been deleted.
