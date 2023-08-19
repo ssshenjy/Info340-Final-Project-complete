@@ -56,6 +56,13 @@ function Input(props) {
       }
     };
 
+    const destinationOptions = destinationData.map((stateData) => (
+      <option key={stateData.state} value={stateData.state}>
+        {stateData.state}
+      </option>
+    ));
+  
+
 
   
   return (
@@ -73,9 +80,7 @@ function Input(props) {
             <label htmlFor="destination" className="form-label">Destination:</label>
             <select className="form-control" id="destination" name="destination" value={destination} onChange={handleDestinationChange}>
             <option value="">Select a state</option>
-              {destinationData.map((stateData) => (
-                <option key={stateData.state} value={stateData.state}> {stateData.state} </option>
-            ))}
+            {destinationOptions}
           </select>
           </div>
 

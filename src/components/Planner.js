@@ -59,7 +59,35 @@ function Planner(props) {
             const isCompleted = curEvent.Itinerary;
             return isCompleted;
         });
-    }
+    };
+
+    const planLinks = props.plans.map((plan, index) => (
+        <div key={index} className="flex-item">
+            <Link to={'/planner/' + plan.destination}>
+                <FontAwesomeIcon icon={['fas', 'suitcase']} className="icon" />
+                <img src="/img/travel-bag.png" alt="plan_icon" />
+                <span>{plan.destination || 'Start your First Plan'}</span>
+            </Link>
+        </div>
+    ));
+
+    const dayLists = dayNumbers.map((dayNumber, index) => (
+        <DayList 
+            key={dayNumber.curDate} 
+            dayNumber={dayNumber} 
+            flexevents={(dayNumber.events || []).map(event => {
+                return {
+                    name: event.EventName,
+                    location: event.Location,
+                    description: event.Description
+                };
+            })}
+            flexitineraries={updatedItineraries(dayNumber.events)} 
+            dailyBudget={dailyBudgets[index]}
+            setDailyBudget={(newDailyBudget) => handleDailyBudgetChange(index, newDailyBudget)}
+            remainingBudget={remainingBudget}
+        />
+    ));
 
     return (
         <div>
@@ -72,15 +100,7 @@ function Planner(props) {
                                     <img src="/img/menu.png" alt="menu_icon" id="menu" />
                                     <h2>Choose Plan</h2>
                                 </div>
-                                {props.plans.map((plan, index) => (
-                                    <div key={index} className="flex-item">
-                                    <Link to={'/planner/' + plan.destination}>
-                                        <FontAwesomeIcon icon={['fas', 'suitcase']} className="icon" />
-                                        <img src="/img/travel-bag.png" alt="plan_icon" />
-                                        <span>{plan.destination || 'Start your First Plan'}</span>
-                                    </Link>
-                                    </div>
-                                ))}
+                                {planLinks}
                                
                                 <div className="flex-item">
                                     <Link to="/input">
@@ -99,24 +119,7 @@ function Planner(props) {
                                     <h2 className="plan_name">{destination}</h2>
                                     <img src="/img/delete.png" alt="delete_icon" className="delete-icon" onClick={deletePlan} />
                                 </div>
-
-                                {dayNumbers.map((dayNumber, index) => (
-                                    <DayList 
-                                        key={dayNumber.curDate} 
-                                        dayNumber={dayNumber} 
-                                        flexevents={(dayNumber.events || []).map(event => {
-                                            return {
-                                                name: event.EventName,
-                                                location: event.Location,
-                                                description: event.Description
-                                            };
-                                        })}
-                                        flexitineraries={updatedItineraries(dayNumber.events)} 
-                                        dailyBudget={dailyBudgets[index]}
-                                        setDailyBudget={(newDailyBudget) => handleDailyBudgetChange(index, newDailyBudget)}
-                                        remainingBudget={remainingBudget}
-                                    />
-                                ))}
+                                {dayLists}
                             </div>
 
                            

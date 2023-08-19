@@ -57,6 +57,14 @@ const DayDefault = ({ initialFlexevents, initialFlexitineraries, dailyBudget, se
       setFlexitineraries(updatedItineraries);
     }
 
+    const itineraries = (flexitinerariesState || []).map((itinerary, index) => (
+      <DayItinerary key={index} itinerary={{ ...itinerary, id: 'completed' }} onDelete={() => deleteItinerary(index)} />
+    ));
+  
+    const flexevents = (flexeventsState || []).map((flexevent, index) => (
+      <DayEvent key={index} flexevent={flexevent} onDelete={() => deleteEvent(index)} />
+    ));
+
   return (
     <div className="flex-day">
       <div className="flex-items">
@@ -79,13 +87,8 @@ const DayDefault = ({ initialFlexevents, initialFlexitineraries, dailyBudget, se
             <p>Remaining Budget: ${remainingBudget}</p>
           </div>
         </div>
-        {(flexitinerariesState || []).map((itinerary, index) => (
-          <DayItinerary key={index} itinerary={{ ...itinerary, id: 'completed' }} onDelete={() => deleteItinerary(index)} />
-        ))}
-
-        {(flexeventsState || []).map((flexevent, index) => (
-            <DayEvent key={index} flexevent={flexevent} onDelete={() => deleteEvent(index)} />
-        ))}
+        {itineraries}
+        {flexevents}
       </div>
     </div>
   );
