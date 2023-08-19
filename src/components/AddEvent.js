@@ -60,8 +60,6 @@ function AddEvent(props) {
         <form onSubmit={handleSubmit}>
           <div className="mb-3">
             <label htmlFor="currentDate" className="form-label">Event Date:</label>
-           
-
             <input type="date" className="form-control" id="current-date" name="current-date"  onChange={handleDateChange} required min={props.tripData.startDate} max={props.tripData.endDate}/>
           </div>
 
@@ -86,13 +84,13 @@ function AddEvent(props) {
             <label className="form-check-label" htmlFor="itinerary">Is It An Itinerary?</label>
           </div>
 
-          {showErrorMessage && <p style={{ color: 'red' }}>Please fill out all the blanks.</p>}
+          {showErrorMessage && 
+          <p style={{ color: 'red' }}>Please fill out all the blanks.</p>
+          }
             <button onClick={handleSubmit} type="submit" className="btn btn-primary">
               Add Event
             </button>
-          {/* )} */}
         </form>
-        
       </main>
     </div>
   );

@@ -1,20 +1,21 @@
 import React, { useState } from 'react';
 
 const DayEvent = ({ flexevent, onDelete }) => {
-    return (
-      <div className="flex-event">
-        <input type="checkbox" />
-        <img src="/img/delete.png" alt="delete_icon" className="delete-icon" onClick={onDelete} />
-        <h4>{flexevent.name}</h4>
-        <p>{flexevent.location}</p>
-        <p>{flexevent.description}</p>
-      </div>
-    );
+  return (
+    <div className="flex-event">
+      <input type="checkbox" />
+      <img src="/img/delete.png" alt="delete_icon" className="delete-icon" onClick={onDelete} />
+      <h4>{flexevent.name}</h4>
+      <p>{flexevent.location}</p>
+      <p>{flexevent.description}</p>
+    </div>
+  );
 };
 
   const DayItinerary = ({ itinerary, onDelete }) => {
     const isItinerary = itinerary.id === 'completed';
     const itineraryClass = itinerary.id === 'completed' ? 'flex-itinerary completed' : 'flex-itinerary needs-attention';
+
     return (
       <div className={itineraryClass} id={itinerary.id}>
         {isItinerary && <input type="checkbox" />}
@@ -33,6 +34,7 @@ const DayDefault = ({ initialFlexevents, initialFlexitineraries, dailyBudget, se
       const newDailyBudget = parseInt(event.target.value);
       setDailyBudget(newDailyBudget);
     };
+
     const [noteContent, setNoteContent] = useState('Click to add notes');
     const [editingNote, setEditingNote] = useState(false);
     const [flexeventsState, setFlexevents] = useState(initialFlexevents);
@@ -41,9 +43,11 @@ const DayDefault = ({ initialFlexevents, initialFlexitineraries, dailyBudget, se
     const handleNoteClick = () => {
       setEditingNote(true);
     };
+
     const handleNoteChange = (event) => {
       setNoteContent(event.target.value);
     };
+
     const handleNoteBlur = () => {
       setEditingNote(false);
     };
@@ -52,6 +56,7 @@ const DayDefault = ({ initialFlexevents, initialFlexitineraries, dailyBudget, se
       const updatedEvents = flexeventsState.filter((_, index) => index !== indexToDelete);
       setFlexevents(updatedEvents);
     }
+
     const deleteItinerary = (indexToDelete) => {
       const updatedItineraries = flexitinerariesState.filter((_, index) => index !== indexToDelete);
       setFlexitineraries(updatedItineraries);
@@ -68,8 +73,10 @@ const DayDefault = ({ initialFlexevents, initialFlexitineraries, dailyBudget, se
   return (
     <div className="flex-day">
       <div className="flex-items">
+
+        {/* A default flex-day would includes a note and a budget box by default*/}
         <div className="flex-defaults">
-        <div className="flex-notes text-wrap" onClick={handleNoteClick} onBlur={handleNoteBlur}>
+          <div className="flex-notes text-wrap" onClick={handleNoteClick} onBlur={handleNoteBlur}>
             <h4>Notes</h4>
             {editingNote ? (
               <textarea
@@ -81,6 +88,7 @@ const DayDefault = ({ initialFlexevents, initialFlexitineraries, dailyBudget, se
               <p>{noteContent}</p>
             )}
           </div>
+
           <div className="flex-budget">
             <h4>Budget</h4>
             <p>Daily Budget: $<input type="number" value={dailyBudget} onChange={handleBudgetChange} /></p>
@@ -101,11 +109,11 @@ const DayList = ({ dayNumber, flexevents, flexitineraries, dailyBudget, setDaily
     <div className="flex-day">
       <h3>Day {dayNumber.curDate} ({dayNumber.plannerDate})</h3>
       <DayDefault 
-          initialFlexevents={flexevents} 
-          initialFlexitineraries={flexitineraries} 
-          dailyBudget={dailyBudget} 
-          setDailyBudget={setDailyBudget}
-          remainingBudget={remainingBudget}
+        initialFlexevents={flexevents} 
+        initialFlexitineraries={flexitineraries} 
+        dailyBudget={dailyBudget} 
+        setDailyBudget={setDailyBudget}
+        remainingBudget={remainingBudget}
       />
     </div>
   );

@@ -32,18 +32,17 @@ function Input(props) {
       setStartDate(e.target.value);
     };
     const handleEndDateChange = (e) => {
-      //setEndDate(e.target.value);
       const inputEndDate = e.target.value;
       setEndDate(inputEndDate);
 
       if (startDate && inputEndDate) {
-          const startDateObj = new Date(startDate);
-          const endDateObj = new Date(inputEndDate);
-          if (endDateObj < startDateObj) {
-              setEndDateError("End date cannot be earlier than start date");
-          } else {
-              setEndDateError("");
-          }
+        const startDateObj = new Date(startDate);
+        const endDateObj = new Date(inputEndDate);
+        if (endDateObj < startDateObj) {
+            setEndDateError("End date cannot be earlier than start date");
+        } else {
+            setEndDateError("");
+        }
       }
     };
 
@@ -67,8 +66,6 @@ function Input(props) {
   
   return (
     <div>
-      {/* Navigation bar */}
-
       <main className="container mt-4 bg-image">
         {/* Page title */}
         <h1>Start a New Trip</h1>
@@ -105,11 +102,12 @@ function Input(props) {
           </div>
 
           <Button type="submit" variant="primary"> Confirm your information before starting the trip</Button>
-
         </form>
+
         {endDateError && (
         <p className="text-danger">Please correct the errors before starting the trip!</p>
         )}
+
         {formSubmitted ? (
           <Link to={"/planner/" + destination} className="btn btn-primary">Start the trip</Link>
         ) : (

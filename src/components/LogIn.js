@@ -6,7 +6,7 @@ const LogIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
-  const [loggedIn, setLoggedIn] = useState(false); // Track login status
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -15,7 +15,7 @@ const LogIn = () => {
     try {
       const auth = getAuth();
       await signInWithEmailAndPassword(auth, email, password);
-      setLoggedIn(true); // Set login status to true after successful login
+      setLoggedIn(true);
     } catch (error) {
       setError(error.message);
     }
@@ -25,22 +25,14 @@ const LogIn = () => {
     <div>
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
+
+        <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}/>
         <button type="submit">Log In</button>
       </form>
+
       {error && <p>{error}</p>}
-      {/* Conditionally render Link component based on login status */}
+
       {loggedIn ? (
         <p>Successfully logged in! Click to be redirected to start a plan <Link to="/input">/input</Link>...</p>
       ) : (
