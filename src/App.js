@@ -74,6 +74,7 @@ function App(props) {
       </Routes>
       <footer className="bg-light py-3 mt-5">
         <div className="container text-center">
+          <p>Data from <a href="https://www.kaggle.com/datasets/sergejnuss/united-states-cities-database">https://www.kaggle.com/datasets/sergejnuss/united-states-cities-database</a></p>
           <p>&copy; 2023 Journemo. All rights reserved.</p>
           <p id="contact">
             Contact Us: <a href="mailto:info@journemo.com"><span className="material-icons"></span>info@journemo.com</a>
