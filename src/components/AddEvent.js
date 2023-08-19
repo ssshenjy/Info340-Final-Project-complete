@@ -36,7 +36,7 @@ function AddEvent(props) {
     if (currentDate && eventName && location && description) {
       props.addEvent(currentDate, eventName, location, description, itinerary);
       if (isLinkEnabled) {
-        navigate(`/planner/${props.destination}`);
+        navigate("/planner/" + props.destination);
       }
       setIsLinkEnabled(false);
       setShowErrorMessage(false);
