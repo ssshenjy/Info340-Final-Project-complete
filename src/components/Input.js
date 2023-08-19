@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { csv } from 'd3-fetch';
+import Button from 'react-bootstrap/Button'; 
 
 function Input(props) {
     const [destination, setDestination] = useState('');
@@ -98,7 +99,7 @@ function Input(props) {
             <input type="number" className="form-control" id="budget" name="budget" min="0" value={budget} onChange={handleBudgetChange}/>
           </div>
 
-          <button type="submit" className="btn btn-primary">Confirm your information before starting the trip</button>
+          <Button type="submit" variant="primary"> Confirm your information before starting the trip</Button>
 
         </form>
         {endDateError && (

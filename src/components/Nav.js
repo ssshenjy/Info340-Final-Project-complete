@@ -1,26 +1,26 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
 
-export function Nav() {
+export function Navigation() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <Navbar bg="light" expand="lg">
       <div className="container">
         <NavLink to="/introduction" className="navbar-brand">Journemo: Your Travel Planner</NavLink>
-        <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav me-auto">  {/* Changed from ml-auto to me-auto */}
-            <li className="nav-item"><NavLink to="/Input" className="nav-link">Start</NavLink></li>
-            <li className="nav-item"><NavLink to="/AddEvent" className="nav-link">Add</NavLink></li>
-            <li className="nav-item"><NavLink to="/Planner" className="nav-link">Plan</NavLink></li>
-          </ul>
-          <ul className="navbar-nav">  {/* New UL for Sign Up and Log In */}
-            <li className="nav-item"><NavLink to="/SignUp" className="nav-link">Sign Up</NavLink></li>
-            <li className="nav-item"><NavLink to="/LogIn" className="nav-link">Log In</NavLink></li>
-          </ul>
-        </div>
+        <Navbar.Toggle aria-controls="navbarNav" />
+        <Navbar.Collapse id="navbarNav">
+          <Nav className="me-auto">
+            <Nav.Link as={NavLink} to="/Input">Start</Nav.Link>
+            <Nav.Link as={NavLink} to="/AddEvent">Add</Nav.Link>
+            <Nav.Link as={NavLink} to="/Planner">Plan</Nav.Link>
+          </Nav>
+          <Nav>
+            <Nav.Link as={NavLink} to="/SignUp">Sign Up</Nav.Link>
+            <Nav.Link as={NavLink} to="/LogIn">Log In</Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
       </div>
-    </nav>
+    </Navbar>
   );
 }

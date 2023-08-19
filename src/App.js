@@ -1,5 +1,5 @@
 import React from 'react';
-import { Nav } from './components/Nav';
+import { Navigation } from './components/Nav';
 import { Routes, Route } from 'react-router-dom';
 import { useState } from 'react';
 import { initializeApp } from "firebase/app";
@@ -56,7 +56,7 @@ function App(props) {
 
   return (
     <div>
-      <Nav />
+      <Navigation />
 
       {/* Define your routes using the Routes component */}
       <Routes>
