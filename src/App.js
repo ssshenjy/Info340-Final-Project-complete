@@ -1,18 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navigation } from './components/Navigation';
 import { Routes, Route } from 'react-router-dom';
-import { useState } from 'react';
-import { initializeApp } from "firebase/app";
-
+import { getDatabase, ref, set as firebaseSet, push as firebasePush, onValue } from 'firebase/database';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 
 import Introduction from './components/Introduction';
 import Input from './components/Input';
 import Planner from './components/Planner';
 import AddEvent from './components/AddEvent';
-import LogIn from './components/LogIn';  
-import SignUp from './components/SignUp';
+import SignInPage from './components/SignInPage';
+
 
 function App(props) {
+  const db = getDatabase(); // Initialize Firebase Realtime Database
+
   const [tripData, setTripData] = useState({
     destination: '',
     startDate: '',
@@ -40,17 +41,22 @@ function App(props) {
     setEvents([...events, newEvent]);
   };
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyCF3W2sL5iKty6MxkBQ1_C-UXeyp6I1qW0",
-    authDomain: "info340-travel-planner.firebaseapp.com",
-    projectId: "info340-travel-planner",
-    storageBucket: "info340-travel-planner.appspot.com",
-    messagingSenderId: "368458909257",
-    appId: "1:368458909257:web:8d6936f1dd724ec801e198",
-    measurementId: "G-YEHYKWKQ9E"
-  };
+  const auth = getAuth(); // Initialize Firebase Auth
 
-  initializeApp(firebaseConfig);
+  useEffect(() => {
+    // Check if the user is already authenticated
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is logged in
+      } else {
+        // User is not logged in
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, [auth]);
 
   
 
@@ -61,8 +67,8 @@ function App(props) {
       {/* Define your routes using the Routes component */}
       <Routes>
         <Route path="/" element={<Introduction />} />
-        <Route path="/LogIn" element={<LogIn />} />
-        <Route path="/SignUp" element={<SignUp />} />
+        <Route path="/login" element={<SignInPage />} />
+        <Route path="/" element={<Introduction />} />
         <Route path="/introduction" element={<Introduction />} />
         <Route path="/input" element={<Input setTripData={setTripData} addPlan={addPlan}/>} />
         {plans.length > 0 ? (
