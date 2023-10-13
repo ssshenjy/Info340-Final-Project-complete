@@ -13,6 +13,7 @@ import SignInPage from './components/SignInPage';
 
 function App(props) {
   const db = getDatabase(); // Initialize Firebase Realtime Database
+  
 
   const [tripData, setTripData] = useState({
     destination: '',
@@ -22,12 +23,50 @@ function App(props) {
   });
 
   const [plans, setPlans] = useState([]);
+  const [user, setUser] = useState(null);
 
-  const addPlan = (newPlan) => {
-    setPlans([...plans, newPlan]);
-  };
+  const auth = getAuth(); // Initialize Firebase Auth
 
   const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    // Check if the user is already authenticated
+    const unsubscribe = onAuthStateChanged(auth, (authUser) => {
+      if (authUser) {
+        // User is logged in
+        setUser(authUser); // Set the user state
+      } else {
+        // User is not logged in
+        setUser(null); // Set user to null
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, [auth]);
+
+// Adding a new plan
+const addPlan = (newPlan) => {
+  const planRef = ref(db, 'users/' + user.uid + '/plans'); // Assuming 'user' is the authenticated user
+  const newPlanRef = firebasePush(planRef); // Generate a unique plan ID
+  firebaseSet(newPlanRef, newPlan);
+};
+
+// Fetching user plans
+useEffect(() => {
+  if (user) {
+    const userPlansRef = ref(db, 'users/' + user.uid + '/plans');
+    onValue(userPlansRef, (snapshot) => {
+      const plansData = snapshot.val();
+      if (plansData) {
+        const plansArray = Object.values(plansData);
+        setPlans(plansArray);
+      }
+    });
+  }
+}, [user]);
+
 
   const addEvent = (Date, EventName, Location, Description, Itinerary) => {
     const newEvent = {
@@ -41,7 +80,6 @@ function App(props) {
     setEvents([...events, newEvent]);
   };
 
-  const auth = getAuth(); // Initialize Firebase Auth
 
   useEffect(() => {
     // Check if the user is already authenticated

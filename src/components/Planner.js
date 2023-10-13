@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import dayjs from 'dayjs';
 import DayList from './DayList';
 
 function Planner(props) {
-    const { destination, startDate, endDate, budget } = props.tripData || {};
+    const { tripData, plans, events } = props;
+    const { destination, startDate, endDate, budget } = tripData || {};
+
+    const { destination: selectedDestination } = useParams(); // Get the 'destination' parameter from the URL
+
+    const activePlan = plans.find(plan => plan.destination === selectedDestination); // Find the active plan
+
 
     const [planDeleted, setPlanDeleted] = useState(false);
     const [duration, setDuration] = useState(3);
@@ -13,11 +19,30 @@ function Planner(props) {
 
     const [userPlans, setUserPlans] = useState([]);
     
-    const deletePlan = () => {
-        if (window.confirm("Are you sure you want to delete this plan?")) {
-            setPlanDeleted(true);
+
+    useEffect(() => {
+        // Set the dayNumbers based on the active plan's start and end dates
+        if (activePlan) {
+            const { startDate: planStartDate, endDate: planEndDate } = activePlan;
+            const startDateCal = new Date(planStartDate);
+            const endDateCal = new Date(planEndDate);
+            const timeDifference = endDateCal - startDateCal;
+            const inputDuration = Math.ceil(timeDifference / (1000 * 60 * 60 * 24)) + 1;
+
+            setDuration(inputDuration);
+
+            setDayNumbers(Array.from({ length: inputDuration }, (_, index) => {
+                return {
+                    curDate: index + 1,
+                    plannerDate: dayjs(planStartDate).add(index, 'd').format('YYYY-MM-DD'),
+                    events: (events || []).filter((item) => {
+                        return dayjs(item.CurrentDate).unix() === dayjs(planStartDate).add(index, 'd').unix()
+                    })
+                }
+            }));
         }
-    };
+    }, [activePlan, events]);
+    
 
     useEffect(() => {
         if (startDate && endDate) {
@@ -40,6 +65,12 @@ function Planner(props) {
         }
     }, [startDate, endDate, props.events]);
 
+    const deletePlan = () => {
+        if (window.confirm("Are you sure you want to delete this plan?")) {
+            setPlanDeleted(true);
+        }
+    };
+
     const initialBudget = budget;
     const [remainingBudget, setRemainingBudget] = useState(initialBudget);
     const [dailyBudgets, setDailyBudgets] = useState(Array(duration).fill(0));
@@ -60,6 +91,23 @@ function Planner(props) {
             return isCompleted;
         });
     };
+
+    const updateUserPlansInFirebase = async (newPlan) => {
+        try {
+          // Update the user's data in the database with the new plan
+          // For example, push the new plan to the user's plans node in Firebase
+          // Make sure to update the local state (userPlans) as well
+          // Sample code (replace with your Firebase structure):
+          const updatedUserPlans = [...userPlans, newPlan];
+          // Update Firebase
+          // Replace 'userUid' with the actual user's UID
+          // ref(db, `users/${userUid}/plans`).set(updatedUserPlans);
+          // Update local state
+          setUserPlans(updatedUserPlans);
+        } catch (error) {
+          console.error('Error updating user plans:', error);
+        }
+      };
 
     const planLinks = props.plans.map((plan, index) => (
         <div key={index} className="flex-item">
