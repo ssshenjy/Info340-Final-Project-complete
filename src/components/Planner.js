@@ -11,6 +11,8 @@ function Planner(props) {
     const [duration, setDuration] = useState(3);
     const [dayNumbers, setDayNumbers] = useState(Array.from({ length: duration }, (_, index) => index + 1));
 
+    const [userPlans, setUserPlans] = useState([]);
+    
     const deletePlan = () => {
         if (window.confirm("Are you sure you want to delete this plan?")) {
             setPlanDeleted(true);

@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { getAuth, GoogleAuthProvider, EmailAuthProvider, signInWithEmailAndPassword, 
-    signOut, onAuthStateChanged } from 'firebase/auth';
+import {
+  getAuth,
+  GoogleAuthProvider,
+  EmailAuthProvider,
+  createUserWithEmailAndPassword, // Import createUserWithEmailAndPassword for account creation
+  signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+} from 'firebase/auth';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import { Link } from 'react-router-dom';
 import { getDatabase, ref, set as firebaseSet, onValue } from 'firebase/database';
@@ -8,12 +15,9 @@ import { getDatabase, ref, set as firebaseSet, onValue } from 'firebase/database
 const firebaseUIConfig = {
   signInFlow: 'popup',
   signInOptions: [
-    // Add the providers you want to use
     {
       provider: GoogleAuthProvider.PROVIDER_ID,
-      customParameters: {
-        // You can add custom parameters if needed
-      },
+      customParameters: {},
     },
     EmailAuthProvider.PROVIDER_ID,
   ],
@@ -23,28 +27,33 @@ const firebaseUIConfig = {
 };
 
 const SignInPage = () => {
-  const auth = getAuth(); // Initialize Firebase Auth
+  const auth = getAuth();
   const db = getDatabase();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
-  const [loggedIn, setLoggedIn] = useState(false);
-
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    // Check if the user is already authenticated
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        setLoggedIn(true);
+        setUser(user);
+        const userRef = ref(db, `users/${user.uid}`);
+        onValue(userRef, (snapshot) => {
+          const userData = snapshot.val();
+          if (userData) {
+            // Set user data in your state
+            // For example: setEmail(userData.email);
+          }
+        });
       } else {
-        setLoggedIn(false);
+        setUser(null);
       }
     });
-
     return () => {
       unsubscribe();
     };
-  }, [auth]);
+  }, [auth, db]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -52,7 +61,19 @@ const SignInPage = () => {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      setLoggedIn(true);
+    } catch (error) {
+      setError(error.message);
+    }
+  };
+
+  const handleRegistration = async (e) => {
+    e.preventDefault();
+    setError(null);
+
+    try {
+      await createUserWithEmailAndPassword(auth, email, password); // Create a new user account
+      // You may want to handle additional setup or data creation for new users here
+      await signInWithEmailAndPassword(auth, email, password); // Automatically sign in the newly created user
     } catch (error) {
       setError(error.message);
     }
@@ -60,8 +81,7 @@ const SignInPage = () => {
 
   const handleLogout = async () => {
     try {
-      await signOut(auth); // Call the signOut function to log the user out
-      setLoggedIn(false);
+      await signOut(auth);
     } catch (error) {
       console.error('Error logging out:', error);
     }
@@ -69,8 +89,8 @@ const SignInPage = () => {
 
   return (
     <div>
-      <h2>Login</h2>
-      {loggedIn ? (
+      <h2>Login or Register</h2>
+      {user ? (
         <div>
           <p>You are logged in</p>
           <button onClick={handleLogout}>Log Out</button>
@@ -91,6 +111,21 @@ const SignInPage = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
             <button type="submit">Log In</button>
+          </form>
+          <form onSubmit={handleRegistration}>
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <button type="submit">Register</button>
           </form>
           {error && <p>{error}</p>}
         </div>
